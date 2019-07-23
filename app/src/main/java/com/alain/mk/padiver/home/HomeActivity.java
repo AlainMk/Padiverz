@@ -13,7 +13,7 @@ import com.alain.mk.padiver.R;
 import com.alain.mk.padiver.auth.LoginActivity;
 import com.alain.mk.padiver.base.BaseActivity;
 import com.alain.mk.padiver.fragments.HomeFragment;
-import com.alain.mk.padiver.fragments.MessageFragment;
+import com.alain.mk.padiver.fragments.ChatFragment;
 import com.alain.mk.padiver.fragments.ProfileFragment;
 import com.alain.mk.padiver.fragments.user.UsersFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -161,7 +161,7 @@ public class HomeActivity extends BaseActivity {
     }
 
     private void showMessageFragment(){
-        if (this.messageFragment == null) this.messageFragment = new MessageFragment();
+        if (this.messageFragment == null) this.messageFragment = new ChatFragment();
         this.startTransactionFragment(this.messageFragment);
     }
 
