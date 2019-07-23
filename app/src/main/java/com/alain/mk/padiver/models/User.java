@@ -8,12 +8,10 @@ public class User {
     private String email;
     private String phoneNumber;
     private String address;
-    private String techno;
     private String language;
     private String bio;
     private String webSite;
     private String githubLink;
-    private String linkedInLink;
 
     public User() {
     }
@@ -25,19 +23,17 @@ public class User {
         this.urlPicture = urlPicture;
     }
 
-    public User(String uid, String username, String urlPicture, String email, String phoneNumber, String address, String techno, String language, String bio, String webSite, String githubLink, String linkedInLink) {
+    public User(String uid, String username, String urlPicture, String email, String phoneNumber, String address, String language, String bio, String webSite, String githubLink) {
         this.uid = uid;
         this.username = username;
         this.urlPicture = urlPicture;
         this.email = email;
         this.phoneNumber = phoneNumber;
         this.address = address;
-        this.techno = techno;
         this.language = language;
         this.bio = bio;
         this.webSite = webSite;
         this.githubLink = githubLink;
-        this.linkedInLink = linkedInLink;
     }
 
     public String getUid() {
@@ -80,14 +76,6 @@ public class User {
         this.address = address;
     }
 
-    public String getTechno() {
-        return techno;
-    }
-
-    public void setTechno(String techno) {
-        this.techno = techno;
-    }
-
     public String getLanguage() {
         return language;
     }
@@ -118,14 +106,6 @@ public class User {
 
     public void setGithubLink(String githubLink) {
         this.githubLink = githubLink;
-    }
-
-    public String getLinkedInLink() {
-        return linkedInLink;
-    }
-
-    public void setLinkedInLink(String linkedInLink) {
-        this.linkedInLink = linkedInLink;
     }
 
     public String getEmail() {

@@ -29,4 +29,9 @@
     <string name="text_view_code">Votre code :</string>
     <string name="info_no_amount_found">Aucun dépôt</string>
     <string name="info_no_date">Aucune date</string>
+    <string name="info_no_address_location">Aucune adresse</string>
+    <string name="info_no_github_link">Aucun lien github</string>
+    <string name="info_no_bio">Aucune biographie</string>
+    <string name="info_no_web_site">Aucun site web</string>
+    <string name="info_no_language">Aucun langage</string>
 </resources>
