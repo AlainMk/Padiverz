@@ -1,5 +1,7 @@
 package com.alain.mk.padiver.fragments.user;
 
+import android.content.Intent;
+
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -11,6 +13,8 @@ import com.alain.mk.padiver.utils.ItemClickSupport;
 import com.bumptech.glide.Glide;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.firebase.firestore.Query;
+
+import javax.annotation.Nullable;
 
 import butterknife.BindView;
 
@@ -30,10 +34,14 @@ public class UsersFragment extends BaseFragment {
 
         this.configureRecyclerview();
     }
+    // --------------------
+    // REST REQUESTS
+    // --------------------
 
     private void configureRecyclerview() {
 
         this.userAdapter = new UserAdapter(generateOptionsForAdapter(UserHelper.getUsersCollection()), Glide.with(this));
+
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         recyclerView.setAdapter(this.userAdapter);
 
@@ -46,6 +54,8 @@ public class UsersFragment extends BaseFragment {
         fragment.setUser(user);
         fragment.show(getActivity().getSupportFragmentManager(), "MODAL");
     }
+
+
 
     // --------------------
     // UI

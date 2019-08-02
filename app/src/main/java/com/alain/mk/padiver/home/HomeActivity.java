@@ -13,7 +13,7 @@ import com.alain.mk.padiver.R;
 import com.alain.mk.padiver.auth.LoginActivity;
 import com.alain.mk.padiver.base.BaseActivity;
 import com.alain.mk.padiver.fragments.HomeFragment;
-import com.alain.mk.padiver.fragments.ChatFragment;
+import com.alain.mk.padiver.fragments.chat.ChatFragment;
 import com.alain.mk.padiver.fragments.ProfileFragment;
 import com.alain.mk.padiver.fragments.user.UsersFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;

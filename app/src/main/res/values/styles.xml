@@ -14,4 +14,12 @@
         <item name="colorControlNormal">@color/grey_40</item>
     </style>
 
+
+    <!-- STYLE FOR MAIN ACTIVITY -->
+    <style name="AppTheme.NoTitle" parent="AppTheme">
+        <item name="windowNoTitle">true</item>
+        <item name="windowActionBar">false</item>
+        <item name="actionBarTheme">@null</item>
+    </style>
+
 </resources>

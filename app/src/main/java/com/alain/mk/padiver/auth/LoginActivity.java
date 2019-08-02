@@ -27,6 +27,10 @@ public class LoginActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         firebaseAuth = FirebaseAuth.getInstance();
         progressDialog = new ProgressDialog(this);
+        if (this.isCurrentUserLogged()){
+
+            startActivity(new Intent(this, HomeActivity.class));
+        }
     }
 
     @Override
