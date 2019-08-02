@@ -26,9 +26,6 @@
             android:parentActivityName=".auth.LoginActivity"
             android:label="Create Account"/>
 
-        <activity
-            android:name=".message.MessageActivity"
-            android:theme="@style/AppTheme.NoTitle"/>
     </application>
 
 </manifest>

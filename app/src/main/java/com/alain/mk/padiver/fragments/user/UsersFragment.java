@@ -14,8 +14,6 @@ import com.bumptech.glide.Glide;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.firebase.firestore.Query;
 
-import javax.annotation.Nullable;
-
 import butterknife.BindView;
 
 public class UsersFragment extends BaseFragment {
@@ -54,7 +52,6 @@ public class UsersFragment extends BaseFragment {
         fragment.setUser(user);
         fragment.show(getActivity().getSupportFragmentManager(), "MODAL");
     }
-
 
 
     // --------------------
