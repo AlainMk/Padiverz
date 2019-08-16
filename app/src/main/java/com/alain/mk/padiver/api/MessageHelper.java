@@ -43,13 +43,23 @@ public class MessageHelper {
 
     // --- CREATE MESSAGE WITH IMAGE ---
 
-    public static Task<DocumentReference> createMessageWithImageForChat(String texteMessage, String userSenderId, String userReceiveId, String urlImage, User userSender) {
+    public static Task<DocumentReference> createFirstMessageWithImageForChat(String urlImage, String texteMessage, String userSenderId, String userReceiveId, User userSender) {
 
         Message message = new Message(texteMessage, userSenderId, userReceiveId, urlImage, userSender);
 
         return ChatHelper.getChatCollection()
                 .document(userSenderId)
                 .collection(userReceiveId)
+                .add(message);
+    }
+
+    public static Task<DocumentReference> createSecondMessageWithImageForChat(String urlImage, String texteMessage, String userSenderId, String userReceiveId, User userSender) {
+
+        Message message = new Message(texteMessage, userSenderId, userReceiveId, urlImage, userSender);
+
+        return ChatHelper.getChatCollection()
+                .document(userReceiveId)
+                .collection(userSenderId)
                 .add(message);
     }
 

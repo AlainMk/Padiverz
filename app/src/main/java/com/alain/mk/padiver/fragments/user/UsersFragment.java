@@ -1,6 +1,7 @@
 package com.alain.mk.padiver.fragments.user;
 
 import android.content.Intent;
+import android.view.View;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -12,20 +13,16 @@ import com.alain.mk.padiver.message.MessageActivity;
 import com.alain.mk.padiver.models.User;
 import com.alain.mk.padiver.utils.ItemClickSupport;
 import com.bumptech.glide.Glide;
+import com.facebook.shimmer.ShimmerFrameLayout;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
-import com.google.firebase.firestore.DocumentSnapshot;
-import com.google.firebase.firestore.EventListener;
-import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.Query;
-import com.google.firebase.firestore.QuerySnapshot;
-
-import javax.annotation.Nullable;
 
 import butterknife.BindView;
 
-public class UsersFragment extends BaseFragment {
+public class UsersFragment extends BaseFragment implements UserAdapter.Listener{
 
     @BindView(R.id.fragment_users_recycler_view) RecyclerView recyclerView;
+    @BindView(R.id.fragment_users_shimmer_container) ShimmerFrameLayout container;
 
     private UserAdapter userAdapter;
 
@@ -39,13 +36,26 @@ public class UsersFragment extends BaseFragment {
 
         this.configureRecyclerview();
     }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        container.startShimmer();
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        container.stopShimmer();
+    }
+
     // --------------------
     // REST REQUESTS
     // --------------------
 
     private void configureRecyclerview() {
 
-        this.userAdapter = new UserAdapter(generateOptionsForAdapter(UserHelper.getUsersCollection()), Glide.with(this));
+        this.userAdapter = new UserAdapter(generateOptionsForAdapter(UserHelper.getUsersCollection()), Glide.with(this), this);
 
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         recyclerView.setAdapter(this.userAdapter);
@@ -78,5 +88,11 @@ public class UsersFragment extends BaseFragment {
                 .setQuery(query, User.class)
                 .setLifecycleOwner(this)
                 .build();
+    }
+
+    @Override
+    public void onDataChanged() {
+
+        container.setVisibility(this.userAdapter.getItemCount() == 0 ? View.VISIBLE : View.GONE);
     }
 }

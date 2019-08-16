@@ -13,12 +13,20 @@ import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 
 public class UserAdapter extends FirestoreRecyclerAdapter<User, UsersViewHolder> {
 
+    public interface Listener {
+        void onDataChanged();
+    }
+
     private User user;
     private RequestManager glide;
 
-    public UserAdapter(@NonNull FirestoreRecyclerOptions<User> options, RequestManager glide) {
+    //FOR COMMUNICATION
+    private Listener callback;
+
+    public UserAdapter(@NonNull FirestoreRecyclerOptions<User> options, RequestManager glide, Listener callback) {
         super(options);
         this.glide = glide;
+        this.callback = callback;
     }
 
     @Override
@@ -36,5 +44,11 @@ public class UserAdapter extends FirestoreRecyclerAdapter<User, UsersViewHolder>
 
     public User getUser(int position) {
         return this.user = getItem(position);
+    }
+
+    @Override
+    public void onDataChanged() {
+        super.onDataChanged();
+        this.callback.onDataChanged();
     }
 }

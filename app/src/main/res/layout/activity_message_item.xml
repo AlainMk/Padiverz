@@ -5,6 +5,7 @@
     android:id="@+id/activity_message_tem_root_view"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:orientation="vertical"
     android:layout_margin="5dip">
 
     <!-- PROFILE CONTAINER -->
@@ -45,6 +46,7 @@
                 android:id="@+id/activity_chat_item_message_container_image_sent_cardview_image"
                 android:layout_width="200dip"
                 android:layout_height="250dip"
+                android:src="@mipmap/ic_launcher"
                 android:scaleType="centerCrop"/>
         </androidx.cardview.widget.CardView>
 
@@ -63,12 +65,13 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:padding="1dip">
+                android:padding="4dip">
 
                 <TextView
                     android:id="@+id/activity_message_item_container_text_message_container_text_view"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:maxWidth="260dp"
                     android:text="Message content"
                     android:layout_marginLeft="@dimen/spacing_middle"
                     android:layout_marginRight="@dimen/spacing_middle"
@@ -77,21 +80,21 @@
                     android:textColor="@android:color/white"
                     android:textStyle="normal"/>
 
-                <TextView
-                    android:id="@+id/activity_message_item_container_text_view_date"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="right|end"
-                    android:gravity="center"
-                    android:text="02:30"
-                    android:layout_marginRight="@dimen/spacing_medium"
-                    android:textColor="@color/grey_5"
-                    android:textSize="12sp" />
-
             </LinearLayout>
 
         </LinearLayout>
 
+        <TextView
+            android:id="@+id/activity_message_item_container_text_view_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="21:25"
+            android:layout_below="@id/activity_message_item_container_text_message_container"
+            android:layout_alignParentBottom="true"
+            android:layout_alignRight="@id/activity_message_item_container_text_message_container"
+            android:textColor="@color/grey_5"
+            android:textStyle="bold"
+            android:textSize="@dimen/default_text_size_mini" />
     </RelativeLayout>
 
 </RelativeLayout>

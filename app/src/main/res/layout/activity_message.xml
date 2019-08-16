@@ -10,7 +10,7 @@
         android:id="@+id/activity_message_buttons_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/grey_900"
+        android:background="@color/colorPrimary"
         android:gravity="center_vertical"
         android:orientation="horizontal">
 
@@ -99,7 +99,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:background="@color/grey_900"
+        android:background="@color/colorPrimary"
         android:layout_margin="@dimen/default_margin">
 
             <ImageButton
@@ -110,7 +110,17 @@
                 android:clickable="true"
                 android:padding="13dp"
                 android:tint="@color/grey_40"
-                app:srcCompat="@drawable/ic_attach_file" />
+                app:srcCompat="@drawable/ic_add" />
+
+            <ImageButton
+                android:id="@+id/activity_message_add_emojis_button"
+                android:layout_width="@dimen/spacing_xxlarge"
+                android:layout_height="@dimen/spacing_xxlarge"
+                android:background="?attr/selectableItemBackground"
+                android:clickable="true"
+                android:padding="13dp"
+                android:tint="@color/grey_40"
+                app:srcCompat="@drawable/ic_emotion" />
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/activity_message_edit_text"

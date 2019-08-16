@@ -19,7 +19,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:background="@color/grey_900"
+        android:background="@color/colorPrimary"
         app:itemIconTint="@drawable/color_state_light"
         app:itemTextColor="@drawable/color_state_light"
         app:menu="@menu/menu_bottom_navigation" />

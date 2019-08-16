@@ -56,7 +56,7 @@ public class MessageViewHolder extends RecyclerView.ViewHolder {
 
         // Update message TextView
         this.textViewMessage.setText(message.getMessage());
-        this.textViewMessage.setTextAlignment(isCurrentUser ? View.TEXT_ALIGNMENT_TEXT_END : View.TEXT_ALIGNMENT_TEXT_START);
+        this.textViewMessage.setTextAlignment(isCurrentUser ? View.TEXT_ALIGNMENT_TEXT_START : View.TEXT_ALIGNMENT_TEXT_START);
 
         // Update date TextView
         if (message.getDateCreated() != null) this.textViewDate.setText(this.convertDateToHour(message.getDateCreated()));
@@ -91,7 +91,7 @@ public class MessageViewHolder extends RecyclerView.ViewHolder {
 
         // CARDVIEW IMAGE SEND
         RelativeLayout.LayoutParams paramsImageView = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
-        paramsImageView.addRule(isSender ? RelativeLayout.ALIGN_LEFT : RelativeLayout.ALIGN_RIGHT, R.id.activity_message_item_container_text_message_container);
+        paramsImageView.addRule(isSender ? RelativeLayout.LEFT_OF : RelativeLayout.RIGHT_OF);
         this.cardViewImageSent.setLayoutParams(paramsImageView);
 
         this.rootView.requestLayout();
