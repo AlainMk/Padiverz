@@ -26,15 +26,16 @@ import com.alain.mk.padiver.models.User;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
+import com.stfalcon.imageviewer.StfalconImageViewer;
+import com.stfalcon.imageviewer.loader.ImageLoader;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 import butterknife.BindView;
@@ -250,5 +251,13 @@ public class MessageActivity extends BaseActivity implements MessageAdapter.List
     public void onDataChanged() {
         // Show TextView in case RecyclerView is empty
         textViewRecyclerViewEmpty.setVisibility(this.messageAdapter.getItemCount() == 0 ? View.VISIBLE : View.GONE);
+    }
+
+    @Override
+    public void onClickMessageImage(int position) {
+
+        List<String> list = new ArrayList<String>();
+        list.add(messageAdapter.getMessage(position).getUrlImage());
+        new StfalconImageViewer.Builder<>(this, list, (imageView, imageUrl) -> Glide.with(this).load(imageUrl).into(imageView)).show();
     }
 }

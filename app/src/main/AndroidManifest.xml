@@ -31,6 +31,9 @@
         <activity
             android:name=".message.MessageActivity"
             android:theme="@style/AppTheme.NoTitle"/>
+        <activity
+            android:name=".ImageActivity"
+            android:parentActivityName=".home.HomeActivity"/>
     </application>
 
 </manifest>

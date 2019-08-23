@@ -54,5 +54,12 @@ dependencies {
     implementation 'pub.devrel:easypermissions:3.0.0'
     //EMOJIS
     implementation 'com.vanniktech:emoji-google:0.6.0'
+    //IMAGE CROPPER
+    api 'com.theartofdev.edmodo:android-image-cropper:2.8.0'
+    //IMAGE COMPRESSOR
+    implementation 'id.zelory:compressor:2.1.0'
+    implementation 'com.github.stfalcon:stfalcon-imageviewer:0.1.0'
+    implementation 'com.github.chrisbanes:PhotoView:2.2.0'
+
 }
 apply plugin: 'com.google.gms.google-services'

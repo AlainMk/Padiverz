@@ -5,4 +5,18 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+
+        <!-- IMAGE SENT -->
+        <Button
+            android:id="@+id/fragment_container_image_sent_cardview_image"
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:layout_marginLeft="-4dp"
+            android:layout_marginRight="-4dp"
+            android:background="@drawable/btn_rounded_green_300"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true"
+            android:text="Voir Image Profil"
+            android:textAllCaps="false"
+            android:textColor="@color/blue_grey_900" />
 </RelativeLayout>

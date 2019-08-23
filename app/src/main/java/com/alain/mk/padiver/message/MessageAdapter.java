@@ -15,11 +15,13 @@ public class MessageAdapter extends FirestoreRecyclerAdapter<Message, MessageVie
 
     public interface Listener {
         void onDataChanged();
+        void onClickMessageImage(int position);
     }
 
     //FOR DATA
     private final RequestManager glide;
     private final String idCurrentUser;
+    private Message message;
 
     //FOR COMMUNICATION
     private Listener callback;
@@ -33,7 +35,7 @@ public class MessageAdapter extends FirestoreRecyclerAdapter<Message, MessageVie
 
     @Override
     protected void onBindViewHolder(@NonNull MessageViewHolder holder, int position, @NonNull Message model) {
-        holder.updateWithMessage(model, this.idCurrentUser, this.glide);
+        holder.updateWithMessage(this.getMessage(position), this.idCurrentUser, this.glide, this.callback);
     }
 
     @NonNull
@@ -47,5 +49,10 @@ public class MessageAdapter extends FirestoreRecyclerAdapter<Message, MessageVie
     public void onDataChanged() {
         super.onDataChanged();
         this.callback.onDataChanged();
+    }
+
+    public Message getMessage(int position){
+
+        return this.message= getItem(position);
     }
 }

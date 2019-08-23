@@ -16,6 +16,7 @@ import com.alain.mk.padiver.R;
 import com.alain.mk.padiver.models.Message;
 import com.bumptech.glide.RequestManager;
 
+import java.lang.ref.WeakReference;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -23,7 +24,7 @@ import java.util.Date;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class MessageViewHolder extends RecyclerView.ViewHolder {
+public class MessageViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
     @BindView(R.id.activity_message_tem_root_view) RelativeLayout rootView;
     // MESSAGE CONTAINER
@@ -41,6 +42,7 @@ public class MessageViewHolder extends RecyclerView.ViewHolder {
     //FOR DATA
     private final int colorCurrentUser;
     private final int colorRemoteUser;
+    private WeakReference<MessageAdapter.Listener> callbackWeakRef;
 
     public MessageViewHolder(@NonNull View itemView) {
         super(itemView);
@@ -49,7 +51,7 @@ public class MessageViewHolder extends RecyclerView.ViewHolder {
         colorRemoteUser = ContextCompat.getColor(itemView.getContext(), R.color.colorPrimary);
     }
 
-    public void updateWithMessage(Message message, String currentUserId, RequestManager glide){
+    public void updateWithMessage(Message message, String currentUserId, RequestManager glide, MessageAdapter.Listener callback){
 
         // Check if current user is the sender
         Boolean isCurrentUser = message.getUserSender().getUid().equals(currentUserId);
@@ -69,6 +71,8 @@ public class MessageViewHolder extends RecyclerView.ViewHolder {
         } else {
             this.imageViewSent.setVisibility(View.GONE);
         }
+        this.imageViewSent.setOnClickListener(this);
+        this.callbackWeakRef = new WeakReference<>(callback);
 
         //Update Message Bubble Color Background
         ((GradientDrawable) textMessageContainer.getBackground()).setColor(isCurrentUser ? colorCurrentUser : colorRemoteUser);
@@ -102,5 +106,12 @@ public class MessageViewHolder extends RecyclerView.ViewHolder {
     private String convertDateToHour(Date date){
         DateFormat dfTime = new SimpleDateFormat("HH:mm");
         return dfTime.format(date);
+    }
+
+    @Override
+    public void onClick(View v) {
+
+        MessageAdapter.Listener callback = callbackWeakRef.get();
+        if (callback != null) callback.onClickMessageImage(getAdapterPosition());
     }
 }
