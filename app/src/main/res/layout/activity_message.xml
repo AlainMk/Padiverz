@@ -88,8 +88,8 @@
     <!-- IMAGE CHOSEN PREVIEW -->
     <ImageView
         android:id="@+id/activity_message_image_chosen_preview"
-        android:layout_width="100dip"
-        android:layout_height="100dip"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_margin="@dimen/default_margin"
         android:layout_above="@id/activity_message_add_message_container"/>
 

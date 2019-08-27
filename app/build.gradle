@@ -40,10 +40,10 @@ dependencies {
     implementation 'com.jakewharton:butterknife:10.1.0'
     annotationProcessor 'com.jakewharton:butterknife-compiler:10.1.0'
     //FIREBASE
-    implementation 'com.google.firebase:firebase-core:17.0.1'
-    implementation 'com.google.firebase:firebase-storage:18.1.1'
-    implementation 'com.google.firebase:firebase-messaging:19.0.1'
-    implementation 'com.google.firebase:firebase-inappmessaging-display:18.0.2'
+    implementation 'com.google.firebase:firebase-analytics:17.1.0'
+    implementation 'com.google.firebase:firebase-storage:19.0.0'
+    implementation 'com.google.firebase:firebase-messaging:20.0.0'
+    implementation 'com.google.firebase:firebase-inappmessaging-display:19.0.0'
 
     // FirebaseUI
     implementation 'com.firebaseui:firebase-ui-firestore:5.0.0'
@@ -57,7 +57,6 @@ dependencies {
     //IMAGE CROPPER
     api 'com.theartofdev.edmodo:android-image-cropper:2.8.0'
     //IMAGE COMPRESSOR
-    implementation 'id.zelory:compressor:2.1.0'
     implementation 'com.github.stfalcon:stfalcon-imageviewer:0.1.0'
     implementation 'com.github.chrisbanes:PhotoView:2.2.0'
 

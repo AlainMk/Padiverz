@@ -2,6 +2,8 @@ package com.alain.mk.padiver.message;
 
 import android.Manifest;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -11,7 +13,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -32,8 +33,8 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 import com.stfalcon.imageviewer.StfalconImageViewer;
-import com.stfalcon.imageviewer.loader.ImageLoader;
 
+import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -127,7 +128,7 @@ public class MessageActivity extends BaseActivity implements MessageAdapter.List
                 this.editTextMessage.setText("");
             }else {
                 // SEND A IMAGE + TEXT IMAGE
-                this.uploadPhotoInFirebaseAndSendMessage(editTextMessage.getText().toString());
+                this.uploadPhotoInStorageAndSendMessage(editTextMessage.getText().toString());
                 this.editTextMessage.setText("");
                 this.imageViewPreview.setImageDrawable(null);
             }
@@ -147,13 +148,23 @@ public class MessageActivity extends BaseActivity implements MessageAdapter.List
         UserHelper.getUser(uid).addOnSuccessListener(documentSnapshot -> modelReceiveUser = documentSnapshot.toObject(User.class));
     }
 
-    private void uploadPhotoInFirebaseAndSendMessage(final String message) {
+    private void uploadPhotoInStorageAndSendMessage(final String message) {
         String uuid = UUID.randomUUID().toString(); // GENERATE UNIQUE STRING
         String uid = getIntent().getStringExtra("uid");
+
         // UPLOAD TO GCS
         StorageReference mImageRef = FirebaseStorage.getInstance().getReference(uuid);
 
-        mImageRef.putFile(this.uriImageSelected).addOnCompleteListener(MessageActivity.this,
+        imageViewPreview.setDrawingCacheEnabled(true);
+        imageViewPreview.buildDrawingCache();
+        Bitmap bitmap = ((BitmapDrawable) imageViewPreview.getDrawable()).getBitmap();
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 50, baos);
+        byte[] data = baos.toByteArray();
+
+        UploadTask uploadTask = mImageRef.putBytes(data);
+
+        uploadTask.addOnCompleteListener(MessageActivity.this,
             task -> {
                 if (task.isSuccessful()) {
                     task.getResult().getMetadata().getReference().getDownloadUrl()
@@ -166,6 +177,9 @@ public class MessageActivity extends BaseActivity implements MessageAdapter.List
                                     MessageHelper.createFirstMessageWithImageForChat(pathImageSavedInFirebase, message, this.getCurrentUser().getUid(), uid, modelCurrentUser).addOnFailureListener(onFailureListener());
 
                                     MessageHelper.createSecondMessageWithImageForChat(pathImageSavedInFirebase, message, this.getCurrentUser().getUid(), uid, modelCurrentUser).addOnFailureListener(onFailureListener());
+
+                                    ConvHelper.createFirstConv(message, this.getCurrentUser().getUid(), uid, modelReceiveUser).addOnFailureListener(this.onFailureListener());
+                                    ConvHelper.createSecondConv(message, this.getCurrentUser().getUid(), uid, modelCurrentUser).addOnFailureListener(this.onFailureListener());
                                 }
                         });
                 }
@@ -235,7 +249,6 @@ public class MessageActivity extends BaseActivity implements MessageAdapter.List
                 this.uriImageSelected = data.getData();
                 Glide.with(this) //SHOWING PREVIEW OF IMAGE
                         .load(this.uriImageSelected)
-                        .apply(RequestOptions.circleCropTransform())
                         .into(this.imageViewPreview);
             } else {
                 Toast.makeText(this, getString(R.string.toast_title_no_image_chosen), Toast.LENGTH_SHORT).show();
