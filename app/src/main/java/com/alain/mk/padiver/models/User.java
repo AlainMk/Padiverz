@@ -6,6 +6,7 @@ public class User {
     private String username;
     private String urlPicture;
     private String email;
+    private String tokenId;
     private String phoneNumber;
     private String address;
     private String language;
@@ -16,18 +17,20 @@ public class User {
     public User() {
     }
 
-    public User(String uid, String username, String email, String urlPicture) {
+    public User(String uid, String username, String email, String urlPicture, String tokenId) {
         this.uid = uid;
         this.username = username;
         this.email = email;
         this.urlPicture = urlPicture;
+        this.tokenId = tokenId;
     }
 
-    public User(String uid, String username, String urlPicture, String email, String phoneNumber, String address, String language, String bio, String webSite, String githubLink) {
+    public User(String uid, String username, String urlPicture, String email, String tokenId, String phoneNumber, String address, String language, String bio, String webSite, String githubLink) {
         this.uid = uid;
         this.username = username;
         this.urlPicture = urlPicture;
         this.email = email;
+        this.tokenId = tokenId;
         this.phoneNumber = phoneNumber;
         this.address = address;
         this.language = language;
@@ -114,5 +117,13 @@ public class User {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getTokenId() {
+        return tokenId;
+    }
+
+    public void setTokenId(String tokenId) {
+        this.tokenId = tokenId;
     }
 }

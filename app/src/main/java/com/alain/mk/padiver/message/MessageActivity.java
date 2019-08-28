@@ -19,6 +19,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.alain.mk.padiver.R;
 import com.alain.mk.padiver.api.ConvHelper;
+import com.alain.mk.padiver.api.NotificationHelper;
 import com.alain.mk.padiver.api.UserHelper;
 import com.alain.mk.padiver.base.BaseActivity;
 import com.alain.mk.padiver.models.Message;
@@ -125,6 +126,8 @@ public class MessageActivity extends BaseActivity implements MessageAdapter.List
                 ConvHelper.createFirstConv(editTextMessage.getText().toString(), this.getCurrentUser().getUid(), uid, modelReceiveUser).addOnFailureListener(this.onFailureListener());
                 ConvHelper.createSecondConv(editTextMessage.getText().toString(), this.getCurrentUser().getUid(), uid, modelCurrentUser).addOnFailureListener(this.onFailureListener());
 
+                NotificationHelper.createMessage(editTextMessage.getText().toString(), this.getCurrentUser().getUid(), uid);
+
                 this.editTextMessage.setText("");
             }else {
                 // SEND A IMAGE + TEXT IMAGE
@@ -180,6 +183,8 @@ public class MessageActivity extends BaseActivity implements MessageAdapter.List
 
                                     ConvHelper.createFirstConv(message, this.getCurrentUser().getUid(), uid, modelReceiveUser).addOnFailureListener(this.onFailureListener());
                                     ConvHelper.createSecondConv(message, this.getCurrentUser().getUid(), uid, modelCurrentUser).addOnFailureListener(this.onFailureListener());
+
+                                    NotificationHelper.createMessage(message, this.getCurrentUser().getUid(), uid);
                                 }
                         });
                 }

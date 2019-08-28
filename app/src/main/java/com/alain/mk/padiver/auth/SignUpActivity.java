@@ -12,7 +12,9 @@ import com.alain.mk.padiver.R;
 import com.alain.mk.padiver.api.UserHelper;
 import com.alain.mk.padiver.base.BaseActivity;
 import com.alain.mk.padiver.home.HomeActivity;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.GetTokenResult;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -80,7 +82,11 @@ public class SignUpActivity extends BaseActivity {
             String email = this.getCurrentUser().getEmail();
             String uid = this.getCurrentUser().getUid();
 
-            UserHelper.createUser(uid, username, email, urlPicture).addOnFailureListener(this.onFailureListener());
+            this.getCurrentUser().getIdToken(true).addOnSuccessListener(getTokenResult -> {
+                String tokenId = getTokenResult.getToken();
+                UserHelper.createUser(uid, username, email, urlPicture, tokenId).addOnFailureListener(this.onFailureListener());
+            });
+
         }
     }
 

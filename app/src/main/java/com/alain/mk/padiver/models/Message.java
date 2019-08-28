@@ -16,6 +16,11 @@ public class Message {
     public Message() {
     }
 
+    public Message(String message, String userSenderId) {
+        this.message = message;
+        this.userSenderId = userSenderId;
+    }
+
     public Message(String message, String userSenderId, String userReceiveId, User userSender) {
         this.message = message;
         this.userSender = userSender;
