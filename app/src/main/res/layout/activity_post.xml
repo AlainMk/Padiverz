@@ -40,7 +40,7 @@
                     app:fontFamily="sans-serif-medium" />
 
                 <EditText
-                    android:id="@+id/activity_post_text_title"
+                    android:id="@+id/activity_post_edit_text_title"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/spacing_middle"
@@ -73,7 +73,7 @@
                     app:fontFamily="sans-serif-medium" />
 
                 <com.hootsuite.nachos.NachoTextView
-                    android:id="@+id/activity_post_tags"
+                    android:id="@+id/activity_post_edit_tags"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textColor="@android:color/white"
@@ -106,7 +106,7 @@
                     app:fontFamily="sans-serif-medium" />
 
                 <EditText
-                    android:id="@+id/activity_post_description"
+                    android:id="@+id/activity_post_edit_text_description"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/spacing_middle"
