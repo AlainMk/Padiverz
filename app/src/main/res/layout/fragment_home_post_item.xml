@@ -131,7 +131,7 @@ consequense des ces actes valent la vie des milliers d'hobitants dans le bresil 
                 android:gravity="center_vertical"
                 android:orientation="horizontal">
 
-                <ImageButton
+                <ImageView
                     android:id="@+id/fragment_home_post_item_button_like"
                     android:layout_width="@dimen/spacing_mlarge"
                     android:layout_height="@dimen/spacing_mlarge"
@@ -161,14 +161,14 @@ consequense des ces actes valent la vie des milliers d'hobitants dans le bresil 
                 android:gravity="center_vertical"
                 android:orientation="horizontal">
 
-                <ImageButton
+                <ImageView
                     android:id="@+id/fragment_home_post_item_button_comment"
                     android:layout_width="@dimen/spacing_mlarge"
                     android:layout_height="@dimen/spacing_mlarge"
                     android:layout_marginEnd="@dimen/spacing_middle"
                     android:layout_marginRight="@dimen/spacing_middle"
                     android:tint="@color/grey_40"
-                    app:srcCompat="@drawable/ic_textsms" />
+                    app:srcCompat="@drawable/ic_comment" />
 
                 <TextView
                     android:id="@+id/fragment_home_post_item_text_count_comments"
