@@ -4,10 +4,23 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/fragment_home_nested_scroll_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/black"
+        android:clipToPadding="false"
+        android:scrollbars="none"
+        android:scrollingCache="true"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/fragment_home_recycler_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
+
+    </androidx.core.widget.NestedScrollView>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fragment_home_floating_actiion_button"
@@ -17,6 +30,7 @@
         android:clickable="true"
         android:layout_gravity="bottom|right"
         app:backgroundTint="@color/colorAccent"
+        app:rippleColor="@android:color/white"
         android:src="@drawable/ic_mode_editor"/>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
