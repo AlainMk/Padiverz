@@ -29,8 +29,8 @@ public class HomeViewHolder extends RecyclerView.ViewHolder {
     @BindView(R.id.fragment_home_post_item_text_title) TextView textTitle;
     @BindView(R.id.fragment_home_post_item_text_description) TextView textDescription;
     @BindView(R.id.fragment_home_post_item_image_post) ImageView imagePost;
-    @BindView(R.id.fragment_home_post_item_button_like) ImageButton buttonLike;
-    @BindView(R.id.fragment_home_post_item_button_comment) ImageButton buttonComment;
+    @BindView(R.id.fragment_home_post_item_button_like) ImageView buttonLike;
+    @BindView(R.id.fragment_home_post_item_button_comment) ImageView buttonComment;
     @BindView(R.id.fragment_home_post_item_text_count_like) TextView textCountLikes;
     @BindView(R.id.fragment_home_post_item_text_count_comments) TextView textCountComments;
     // DATE TEXT

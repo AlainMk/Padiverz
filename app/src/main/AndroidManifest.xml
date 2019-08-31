@@ -39,6 +39,7 @@
             android:name=".post.PostActivity"
             android:parentActivityName=".home.HomeActivity"
             android:label="Exprimez vous"/>
+        <activity android:name=".detail.ActivityDetailPost" />
     </application>
 
 </manifest>
