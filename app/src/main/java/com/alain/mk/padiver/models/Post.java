@@ -3,32 +3,31 @@ package com.alain.mk.padiver.models;
 import com.google.firebase.firestore.ServerTimestamp;
 
 import java.util.Date;
-import java.util.List;
 
 public class Post {
 
     private String title;
-    private List<String> tags;
+    private String tags;
     private String description;
     private Date dateCreated;
-    private String userId;
+    private User userSender;
     private String urlImage;
 
     public Post() {
     }
 
-    public Post(String title, List<String> tags, String description,  String userId) {
+    public Post(String title, String tags, String description, User userSender) {
         this.title = title;
         this.tags = tags;
         this.description = description;
-        this.userId = userId;
+        this.userSender = userSender;
     }
 
-    public Post(String title, List<String> tags, String description, String userId, String urlImage) {
+    public Post(String title, String tags, String description, User userSender, String urlImage) {
         this.title = title;
         this.tags = tags;
         this.description = description;
-        this.userId = userId;
+        this.userSender = userSender;
         this.urlImage = urlImage;
     }
 
@@ -40,11 +39,11 @@ public class Post {
         this.title = title;
     }
 
-    public List<String> getTags() {
+    public String getTags() {
         return tags;
     }
 
-    public void setTags(List<String> tags) {
+    public void setTags(String tags) {
         this.tags = tags;
     }
 
@@ -65,12 +64,12 @@ public class Post {
         this.dateCreated = dateCreated;
     }
 
-    public String getUserId() {
-        return userId;
+    public User getUserSender() {
+        return userSender;
     }
 
-    public void setUserId(String userId) {
-        this.userId = userId;
+    public void setUserSender(User userSender) {
+        this.userSender = userSender;
     }
 
     public String getUrlImage() {

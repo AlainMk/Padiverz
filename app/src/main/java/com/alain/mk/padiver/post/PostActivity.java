@@ -2,26 +2,23 @@ package com.alain.mk.padiver.post;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 import androidx.annotation.Nullable;
-import androidx.coordinatorlayout.widget.CoordinatorLayout;
 
 import com.alain.mk.padiver.R;
 import com.alain.mk.padiver.api.PostHelper;
+import com.alain.mk.padiver.api.UserHelper;
 import com.alain.mk.padiver.base.BaseActivity;
 import com.alain.mk.padiver.home.HomeActivity;
+import com.alain.mk.padiver.models.User;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.firestore.DocumentReference;
 import com.hootsuite.nachos.NachoTextView;
 import com.hootsuite.nachos.terminator.ChipTerminatorHandler;
@@ -40,6 +37,8 @@ public class PostActivity extends BaseActivity {
     @BindView(R.id.activity_post_image_view) ImageView editImageView;
 
     private ProgressDialog progressDialog;
+    @Nullable
+    private User modelCurrentUser;
 
     public static final int REGISTER_MEMBER = 30;
 
@@ -49,6 +48,7 @@ public class PostActivity extends BaseActivity {
         progressDialog = new ProgressDialog(this);
         this.configureToolbar();
         this.iniComponent();
+        this.getCurrentUserFromFirestore();
     }
 
     @Override
@@ -108,10 +108,18 @@ public class PostActivity extends BaseActivity {
             editTags.setText(items);
             editTags.addChipTerminator('\n', ChipTerminatorHandler.BEHAVIOR_CHIPIFY_ALL);
 
-            PostHelper.createPost(editTitle.getText().toString(), items, editDescription.getText().toString(), this.getCurrentUser().getUid())
+            PostHelper.createPost(editTitle.getText().toString(), editTags.getText().toString(), editDescription.getText().toString(), modelCurrentUser)
                     .addOnSuccessListener(updateUIAfterRESTRequestsCompleted(REGISTER_MEMBER))
                     .addOnFailureListener(this.onFailureListener());
         }
+    }
+
+    // --------------------
+    // REST REQUESTS
+    // --------------------
+    // Get Current User from Firestore
+    private void getCurrentUserFromFirestore(){
+        UserHelper.getUser(getCurrentUser().getUid()).addOnSuccessListener(documentSnapshot -> modelCurrentUser = documentSnapshot.toObject(User.class));
     }
 
     // --------------------
