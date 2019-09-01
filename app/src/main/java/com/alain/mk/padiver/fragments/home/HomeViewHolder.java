@@ -68,6 +68,7 @@ public class HomeViewHolder extends RecyclerView.ViewHolder implements View.OnCl
         }
 
         this.buttonLike.setOnClickListener(this);
+        this.buttonComment.setOnClickListener(this);
         this.callbackWeakRef = new WeakReference<>(callback);
     }
 
@@ -83,5 +84,6 @@ public class HomeViewHolder extends RecyclerView.ViewHolder implements View.OnCl
 
         HomeAdapter.Listener callback = callbackWeakRef.get();
         if (callback != null) callback.onClickLikeButton(getAdapterPosition());
+        if (callback != null) callback.onClickCommentButton(getAdapterPosition());
     }
 }

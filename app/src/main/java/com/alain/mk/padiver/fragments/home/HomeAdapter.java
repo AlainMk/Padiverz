@@ -17,6 +17,7 @@ public class HomeAdapter extends FirestoreRecyclerAdapter<Post, HomeViewHolder> 
     public interface Listener {
         void onDataChanged();
         void onClickLikeButton(int position);
+        void onClickCommentButton(int position);
     }
 
     private Post post;

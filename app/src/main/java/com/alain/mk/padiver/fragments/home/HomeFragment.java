@@ -151,4 +151,9 @@ public class HomeFragment extends BaseFragment implements HomeAdapter.Listener{
             }
         });
     }
+
+    @Override
+    public void onClickCommentButton(int position) {
+
+    }
 }
