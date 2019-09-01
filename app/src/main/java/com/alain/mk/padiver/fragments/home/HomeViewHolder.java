@@ -14,6 +14,7 @@ import com.alain.mk.padiver.models.User;
 import com.bumptech.glide.RequestManager;
 import com.bumptech.glide.request.RequestOptions;
 
+import java.lang.ref.WeakReference;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -21,7 +22,7 @@ import java.util.Date;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class HomeViewHolder extends RecyclerView.ViewHolder {
+public class HomeViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
 
     @BindView(R.id.fragment_home_post_item_user_name) TextView textUsername;
     @BindView(R.id.fragment_home_post_item_image_profile) ImageView imageProfile;
@@ -36,12 +37,14 @@ public class HomeViewHolder extends RecyclerView.ViewHolder {
     // DATE TEXT
     @BindView(R.id.fragment_home_post_item_text_date) TextView textDate;
 
+    private WeakReference<HomeAdapter.Listener> callbackWeakRef;
+
     public HomeViewHolder(@NonNull View itemView) {
         super(itemView);
         ButterKnife.bind(this, itemView);
     }
 
-    public void updateWithPost(Post post, RequestManager glide) {
+    public void updateWithPost(Post post, RequestManager glide, HomeAdapter.Listener callback) {
 
         textUsername.setText(post.getUserSender().getUsername());
         textTags.setText(post.getTags());
@@ -63,6 +66,9 @@ public class HomeViewHolder extends RecyclerView.ViewHolder {
         } else {
             this.imagePost.setVisibility(View.GONE);
         }
+
+        this.buttonLike.setOnClickListener(this);
+        this.callbackWeakRef = new WeakReference<>(callback);
     }
 
     // ---
@@ -70,5 +76,12 @@ public class HomeViewHolder extends RecyclerView.ViewHolder {
     private String convertDateToHour(Date date){
         DateFormat dfTime = new SimpleDateFormat("HH:mm");
         return dfTime.format(date);
+    }
+
+    @Override
+    public void onClick(View v) {
+
+        HomeAdapter.Listener callback = callbackWeakRef.get();
+        if (callback != null) callback.onClickLikeButton(getAdapterPosition());
     }
 }

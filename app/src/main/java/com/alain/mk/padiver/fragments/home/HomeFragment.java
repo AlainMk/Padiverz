@@ -2,12 +2,18 @@ package com.alain.mk.padiver.fragments.home;
 
 
 import android.content.Intent;
+import android.graphics.Color;
+import android.view.View;
+import android.widget.TextView;
+import android.widget.Toast;
 
+import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.core.widget.NestedScrollView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.alain.mk.padiver.R;
+import com.alain.mk.padiver.api.ArticleHelper;
 import com.alain.mk.padiver.api.PostHelper;
 import com.alain.mk.padiver.base.BaseFragment;
 import com.alain.mk.padiver.detail.DetailPostActivity;
@@ -17,7 +23,9 @@ import com.alain.mk.padiver.utils.ItemClickSupport;
 import com.alain.mk.padiver.utils.ViewAnimation;
 import com.bumptech.glide.Glide;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.firestore.Query;
 
 import butterknife.BindView;
@@ -25,11 +33,13 @@ import butterknife.OnClick;
 
 public class HomeFragment extends BaseFragment implements HomeAdapter.Listener{
 
+    @BindView(R.id.fragment_home_coordinator_layout) CoordinatorLayout coordinatorLayout;
     @BindView(R.id.fragment_home_recycler_view) RecyclerView recyclerView;
     @BindView(R.id.fragment_home_floating_actiion_button) FloatingActionButton floatingActionButton;
     @BindView(R.id.fragment_home_nested_scroll_view) NestedScrollView nestedScrollView;
 
     private HomeAdapter homeAdapter;
+    private static final int REGISTER_LIKE = 10;
 
     @Override
     protected int getLayoutId() {
@@ -69,7 +79,7 @@ public class HomeFragment extends BaseFragment implements HomeAdapter.Listener{
     // --------------------
     private void configureRecyclerView() {
 
-        this.homeAdapter = new HomeAdapter(generateOptionsForAdapter(PostHelper.getPostCollection()), Glide.with(this), this);
+        this.homeAdapter = new HomeAdapter(generateOptionsForAdapter(PostHelper.getPostCollection()), Glide.with(this), this.getCurrentUser().getUid(), this);
 
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         recyclerView.setAdapter(this.homeAdapter);
@@ -89,6 +99,23 @@ public class HomeFragment extends BaseFragment implements HomeAdapter.Listener{
                 .build();
     }
 
+    // Create OnCompleteListener called after tasks ended
+    private OnSuccessListener<Void> updateUIAfterRESTRequestsCompleted(final int origin){
+        return aVoid -> {
+            switch (origin) {
+                case REGISTER_LIKE:
+                    Snackbar snackbar = Snackbar.make(coordinatorLayout, R.string.register_like, Snackbar.LENGTH_SHORT);
+                    View sbView = snackbar.getView();
+                    TextView textView = sbView.findViewById(com.google.android.material.R.id.snackbar_text);
+                    textView.setTextColor(Color.WHITE);
+                    snackbar.show();
+                    break;
+                default:
+                    break;
+            }
+        };
+    }
+
     private void startMessageActivity(Post post) {
 
         Intent intent = new Intent(getActivity(), DetailPostActivity.class);
@@ -105,5 +132,23 @@ public class HomeFragment extends BaseFragment implements HomeAdapter.Listener{
     @Override
     public void onDataChanged() {
 
+    }
+
+    @Override
+    public void onClickLikeButton(int position) {
+
+        Post post = homeAdapter.getPost(position);
+
+        ArticleHelper.getLikeReference(post.getTitle()).document(this.getCurrentUser().getUid()).get().addOnCompleteListener(task -> {
+            if (!task.getResult().exists()){
+
+                ArticleHelper.createLike(this.getCurrentUser().getUid(),post.getTitle()).addOnFailureListener(e -> {
+                    Toast.makeText(getActivity(), "Erreur " + e, Toast.LENGTH_SHORT).show();
+                }).addOnSuccessListener(updateUIAfterRESTRequestsCompleted(REGISTER_LIKE));
+            }else {
+                ArticleHelper.deleteLike(this.getCurrentUser().getUid(), post.getTitle()).addOnFailureListener(e ->
+                    Toast.makeText(getActivity(), "Erreur " + e, Toast.LENGTH_SHORT).show());
+            }
+        });
     }
 }
