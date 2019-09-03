@@ -11,6 +11,11 @@ import com.alain.mk.padiver.models.Post;
 import com.bumptech.glide.RequestManager;
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
+import com.google.firebase.firestore.EventListener;
+import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.firestore.QuerySnapshot;
+
+import javax.annotation.Nullable;
 
 public class HomeAdapter extends FirestoreRecyclerAdapter<Post, HomeViewHolder> {
 
@@ -44,6 +49,24 @@ public class HomeAdapter extends FirestoreRecyclerAdapter<Post, HomeViewHolder> 
                 homeViewHolder.buttonLike.setImageResource(R.drawable.ic_thumb_up_green);
             }else {
                 homeViewHolder.buttonLike.setImageResource(R.drawable.ic_thumb_up);
+            }
+        });
+
+        ArticleHelper.getLikeReference(this.getPost(i).getTitle()).addSnapshotListener((queryDocumentSnapshots, e) -> {
+            if (!queryDocumentSnapshots.isEmpty()) {
+                int count = queryDocumentSnapshots.size();
+                homeViewHolder.textCountLikes.setText(count + " Likes");
+            } else {
+                homeViewHolder.textCountLikes.setText(0 + " Like");
+            }
+        });
+
+        ArticleHelper.getCommnetsCollection(this.getPost(i).getTitle()).addSnapshotListener((queryDocumentSnapshots, e) -> {
+            if (!queryDocumentSnapshots.isEmpty()) {
+                int count = queryDocumentSnapshots.size();
+                homeViewHolder.textCountComments.setText(count + " Comments");
+            } else {
+                homeViewHolder.textCountComments.setText(0 + " Comment");
             }
         });
     }

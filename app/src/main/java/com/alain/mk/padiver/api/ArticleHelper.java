@@ -1,9 +1,13 @@
 package com.alain.mk.padiver.api;
 
+import com.alain.mk.padiver.models.Comment;
 import com.alain.mk.padiver.models.Like;
+import com.alain.mk.padiver.models.User;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
 
 public class ArticleHelper {
 
@@ -21,6 +25,23 @@ public class ArticleHelper {
                 .collection(article);
     }
 
+    // ---- GET COLLECTION ---- //
+
+    public static CollectionReference getCommnetsCollection(String article) {
+        return ArticleHelper.getCollectionReference()
+                .document(DOCUMENT_COMMENT)
+                .collection(article);
+    }
+
+    public static Query getCommnetsReference(String article) {
+        return ArticleHelper.getCollectionReference()
+                .document(DOCUMENT_COMMENT)
+                .collection(article)
+                .orderBy("dateCreated");
+    }
+
+    // ---- CREATE ---- //
+
     public static Task<Void> createLike(String uid, String articleName) {
 
         Like like = new Like(uid);
@@ -34,5 +55,11 @@ public class ArticleHelper {
         return ArticleHelper.getLikeReference(articleName)
                 .document(uid)
                 .delete();
+    }
+
+    public static Task<DocumentReference> createComment(String comments, String articleName, User userSender) {
+        Comment comment = new Comment(comments, userSender);
+        return ArticleHelper.getCommnetsCollection(articleName)
+                .add(comment);
     }
 }

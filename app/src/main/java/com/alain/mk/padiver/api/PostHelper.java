@@ -20,7 +20,7 @@ public class PostHelper {
 
         return FirebaseFirestore.getInstance()
                 .collection(COLLECTION_NAME)
-                .orderBy("dateCreated");
+                .orderBy("dateCreated", Query.Direction.DESCENDING);
     }
 
     public static Task<DocumentReference> createPost(String title, String tags, String description, User userSender) {

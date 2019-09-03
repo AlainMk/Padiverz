@@ -126,6 +126,7 @@ consequense des ces actes valent la vie des milliers d'hobitants dans le bresil 
             android:paddingRight="@dimen/spacing_large">
 
             <LinearLayout
+                android:id="@+id/fragment_home_post_item_linear_like"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center_vertical"
@@ -155,6 +156,7 @@ consequense des ces actes valent la vie des milliers d'hobitants dans le bresil 
                 android:layout_height="0dp" />
 
             <LinearLayout
+                android:id="@+id/fragment_home_post_item_linear_comment"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"

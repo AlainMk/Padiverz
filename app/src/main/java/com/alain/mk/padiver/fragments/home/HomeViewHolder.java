@@ -3,6 +3,7 @@ package com.alain.mk.padiver.fragments.home;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -10,7 +11,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.alain.mk.padiver.R;
 import com.alain.mk.padiver.models.Post;
-import com.alain.mk.padiver.models.User;
 import com.bumptech.glide.RequestManager;
 import com.bumptech.glide.request.RequestOptions;
 
@@ -24,6 +24,8 @@ import butterknife.ButterKnife;
 
 public class HomeViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
 
+    @BindView(R.id.fragment_home_post_item_linear_like) LinearLayout linearLayoutLike;
+    @BindView(R.id.fragment_home_post_item_linear_comment) LinearLayout linearLayoutComment;
     @BindView(R.id.fragment_home_post_item_user_name) TextView textUsername;
     @BindView(R.id.fragment_home_post_item_image_profile) ImageView imageProfile;
     @BindView(R.id.fragment_home_post_item_tags) TextView textTags;
@@ -67,8 +69,8 @@ public class HomeViewHolder extends RecyclerView.ViewHolder implements View.OnCl
             this.imagePost.setVisibility(View.GONE);
         }
 
-        this.buttonLike.setOnClickListener(this);
-        this.buttonComment.setOnClickListener(this);
+        this.linearLayoutLike.setOnClickListener(this);
+        this.linearLayoutComment.setOnClickListener(this);
         this.callbackWeakRef = new WeakReference<>(callback);
     }
 

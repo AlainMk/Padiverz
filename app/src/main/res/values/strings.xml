@@ -44,4 +44,5 @@
     <string name="popup_title_permission_files_access">Cette application a besoin de permission pour fonctionner.</string>
     <string name="toast_title_no_image_chosen">Aucune image choisie&#8230;</string>
     <string name="register_like">Article ajouté aux \"Likes\"</string>
+    <string name="text_view_fragment_comment_error"><![CDATA[Ce fil de discussion ne contient pour le moment aucun commentaire&#8230;]]></string>
 </resources>

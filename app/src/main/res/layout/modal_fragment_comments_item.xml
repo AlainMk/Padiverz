@@ -85,14 +85,13 @@
                             android:layout_marginTop="@dimen/spacing_small"
                             android:text="Depuis la nuit de temps le monde s'est mis en danger dans les recherches mener par les scientifiques et maintenant les
 consequense des ces actes valent la vie des milliers d'hobitants dans le bresil et le canada"
-                            android:maxLines="2"
                             android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                             android:textColor="@color/grey_40" />
 
                     </LinearLayout>
 
                     <TextView
-                        android:id="@+id/modal_fragment_comments_item_date"
+                        android:id="@+id/modal_fragment_comments_item_text_view_date"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="bottom|right"

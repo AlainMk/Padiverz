@@ -17,6 +17,7 @@ import com.alain.mk.padiver.api.ArticleHelper;
 import com.alain.mk.padiver.api.PostHelper;
 import com.alain.mk.padiver.base.BaseFragment;
 import com.alain.mk.padiver.detail.DetailPostActivity;
+import com.alain.mk.padiver.fragments.comment.CommentsModalFragment;
 import com.alain.mk.padiver.models.Post;
 import com.alain.mk.padiver.post.PostActivity;
 import com.alain.mk.padiver.utils.ItemClickSupport;
@@ -142,18 +143,21 @@ public class HomeFragment extends BaseFragment implements HomeAdapter.Listener{
         ArticleHelper.getLikeReference(post.getTitle()).document(this.getCurrentUser().getUid()).get().addOnCompleteListener(task -> {
             if (!task.getResult().exists()){
 
-                ArticleHelper.createLike(this.getCurrentUser().getUid(),post.getTitle()).addOnFailureListener(e -> {
-                    Toast.makeText(getActivity(), "Erreur " + e, Toast.LENGTH_SHORT).show();
-                }).addOnSuccessListener(updateUIAfterRESTRequestsCompleted(REGISTER_LIKE));
+                ArticleHelper.createLike(this.getCurrentUser().getUid(),post.getTitle()).addOnSuccessListener(updateUIAfterRESTRequestsCompleted(REGISTER_LIKE))
+                .addOnFailureListener(e ->
+                        Toast.makeText(getActivity(), "" + e.getMessage(), Toast.LENGTH_SHORT).show());
             }else {
                 ArticleHelper.deleteLike(this.getCurrentUser().getUid(), post.getTitle()).addOnFailureListener(e ->
-                    Toast.makeText(getActivity(), "Erreur " + e, Toast.LENGTH_SHORT).show());
+                    Toast.makeText(getActivity(), "" + e.getMessage(), Toast.LENGTH_SHORT).show());
             }
         });
     }
 
     @Override
     public void onClickCommentButton(int position) {
-
+        Post post = homeAdapter.getPost(position);
+        CommentsModalFragment fragment = new CommentsModalFragment();
+        fragment.setPost(post);
+        fragment.show(getActivity().getSupportFragmentManager(), "MODAL");
     }
 }
