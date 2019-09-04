@@ -34,7 +34,7 @@ public class CommentAdapter extends FirestoreRecyclerAdapter<Comment, CommentVie
     @Override
     protected void onBindViewHolder(@NonNull CommentViewHolder commentViewHolder, int i, @NonNull Comment comment) {
 
-        commentViewHolder.updateWithComment(this.getComment(i), this.glide);
+        commentViewHolder.updateWithComment(this.getComment(i), this.glide, this.callback);
     }
 
     @NonNull

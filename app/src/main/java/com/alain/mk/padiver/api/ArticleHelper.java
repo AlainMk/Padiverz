@@ -40,7 +40,7 @@ public class ArticleHelper {
                 .orderBy("dateCreated");
     }
 
-    // ---- CREATE ---- //
+    // ---- CREATE LIKE---- //
 
     public static Task<Void> createLike(String uid, String articleName) {
 
@@ -50,6 +50,7 @@ public class ArticleHelper {
                 .set(like);
     }
 
+    // ---- DELETE LIKE ---- //
     public static Task<Void> deleteLike(String uid, String articleName) {
 
         return ArticleHelper.getLikeReference(articleName)
@@ -57,8 +58,15 @@ public class ArticleHelper {
                 .delete();
     }
 
+    // ---- CREATE COMMENT---- //
     public static Task<DocumentReference> createComment(String comments, String articleName, User userSender) {
         Comment comment = new Comment(comments, userSender);
+        return ArticleHelper.getCommnetsCollection(articleName)
+                .add(comment);
+    }
+
+    public static Task<DocumentReference> createCommentWithImage(String comments, String articleName, User userSender, String urlImage) {
+        Comment comment = new Comment(comments, userSender, urlImage);
         return ArticleHelper.getCommnetsCollection(articleName)
                 .add(comment);
     }

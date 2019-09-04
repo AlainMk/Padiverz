@@ -10,10 +10,12 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.alain.mk.padiver.R;
+import com.alain.mk.padiver.message.MessageAdapter;
 import com.alain.mk.padiver.models.Comment;
 import com.bumptech.glide.RequestManager;
 import com.bumptech.glide.request.RequestOptions;
 
+import java.lang.ref.WeakReference;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -21,7 +23,7 @@ import java.util.Date;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class CommentViewHolder extends RecyclerView.ViewHolder {
+public class CommentViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
 
     @BindView(R.id.modal_fragment_comments_item_root_view) RelativeLayout rootView;
     // MESSAGE CONTAINER
@@ -34,12 +36,13 @@ public class CommentViewHolder extends RecyclerView.ViewHolder {
     // DATE TEXT
     @BindView(R.id.modal_fragment_comments_item_text_view_date) TextView textViewDate;
 
+    private WeakReference<CommentAdapter.Listener> callbackWeakRef;
     public CommentViewHolder(@NonNull View itemView) {
         super(itemView);
         ButterKnife.bind(this, itemView);
     }
 
-    public void updateWithComment(Comment comment, RequestManager glide) {
+    public void updateWithComment(Comment comment, RequestManager glide, CommentAdapter.Listener callback) {
 
         this.textViewUsername.setText(comment.getUserSender().getUsername());
         this.textViewComment.setText(comment.getComment());
@@ -62,6 +65,9 @@ public class CommentViewHolder extends RecyclerView.ViewHolder {
         } else {
             this.imageViewUser.setVisibility(View.GONE);
         }
+
+        this.imageViewSent.setOnClickListener(this);
+        this.callbackWeakRef = new WeakReference<>(callback);
     }
 
     // ---
@@ -69,5 +75,12 @@ public class CommentViewHolder extends RecyclerView.ViewHolder {
     private String convertDateToHour(Date date){
         DateFormat dfTime = new SimpleDateFormat("dd/MM/yyyy HH:mm");
         return dfTime.format(date);
+    }
+
+    @Override
+    public void onClick(View v) {
+
+        CommentAdapter.Listener callback = callbackWeakRef.get();
+        if (callback != null) callback.onClickCommentImage(getAdapterPosition());
     }
 }

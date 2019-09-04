@@ -11,11 +11,6 @@ import com.alain.mk.padiver.models.Post;
 import com.bumptech.glide.RequestManager;
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
-import com.google.firebase.firestore.EventListener;
-import com.google.firebase.firestore.FirebaseFirestoreException;
-import com.google.firebase.firestore.QuerySnapshot;
-
-import javax.annotation.Nullable;
 
 public class HomeAdapter extends FirestoreRecyclerAdapter<Post, HomeViewHolder> {
 
