@@ -126,7 +126,7 @@ public class MessageActivity extends BaseActivity implements MessageAdapter.List
                 ConvHelper.createFirstConv(editTextMessage.getText().toString(), this.getCurrentUser().getUid(), uid, modelReceiveUser).addOnFailureListener(this.onFailureListener());
                 ConvHelper.createSecondConv(editTextMessage.getText().toString(), this.getCurrentUser().getUid(), uid, modelCurrentUser).addOnFailureListener(this.onFailureListener());
 
-                NotificationHelper.createMessage(editTextMessage.getText().toString(), this.getCurrentUser().getUid(), uid);
+                NotificationHelper.createMessage(editTextMessage.getText().toString(), modelCurrentUser.getUsername(), modelReceiveUser.getUsername(), modelReceiveUser.getDeviceToken(), uid);
 
                 this.editTextMessage.setText("");
             }else {
@@ -184,7 +184,7 @@ public class MessageActivity extends BaseActivity implements MessageAdapter.List
                                     ConvHelper.createFirstConv(message, this.getCurrentUser().getUid(), uid, modelReceiveUser).addOnFailureListener(this.onFailureListener());
                                     ConvHelper.createSecondConv(message, this.getCurrentUser().getUid(), uid, modelCurrentUser).addOnFailureListener(this.onFailureListener());
 
-                                    NotificationHelper.createMessage(message, this.getCurrentUser().getUid(), uid);
+                                    NotificationHelper.createMessageWithImage(pathImageSavedInFirebase, message, modelCurrentUser.getUsername(), modelReceiveUser.getUsername(), modelReceiveUser.getDeviceToken(), uid);
                                 }
                         });
                 }

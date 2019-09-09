@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Padiver</string>
+    <string name="app_name">Padiverz</string>
 
     <string name="error_not_connected">Vous devez vous connecter !</string>
     <string name="error_authentication_canceled">Authentification annulée</string>
@@ -8,6 +8,11 @@
     <string name="connection_succeed">Authentification réussie !</string>
     <string name="button_login_text_logged">Afficher le profil</string>
     <string name="button_login_text_not_logged">Connexion</string>
+
+
+    <!-- NOTIFICATION SERVICE -->
+    <string name="default_notification_channel_id" translatable="false">fcm_default_channel</string>
+    <string name="notification_title">"Vous avez reçu une notification"</string>
 
     <!-- LOGIN ACTIVITY -->
     <string name="toolbar_title_login_activity">Votre Profil</string>

@@ -7,6 +7,7 @@ public class User {
     private String urlPicture;
     private String email;
     private String tokenId;
+    private String deviceToken;
     private String phoneNumber;
     private String address;
     private String language;
@@ -17,20 +18,22 @@ public class User {
     public User() {
     }
 
-    public User(String uid, String username, String email, String urlPicture, String tokenId) {
+    public User(String uid, String username, String email, String urlPicture, String tokenId, String deviceToken) {
         this.uid = uid;
         this.username = username;
         this.email = email;
         this.urlPicture = urlPicture;
         this.tokenId = tokenId;
+        this.deviceToken = deviceToken;
     }
 
-    public User(String uid, String username, String urlPicture, String email, String tokenId, String phoneNumber, String address, String language, String bio, String webSite, String githubLink) {
+    public User(String uid, String username, String urlPicture, String email, String tokenId, String deviceToken, String phoneNumber, String address, String language, String bio, String webSite, String githubLink) {
         this.uid = uid;
         this.username = username;
         this.urlPicture = urlPicture;
         this.email = email;
         this.tokenId = tokenId;
+        this.deviceToken = deviceToken;
         this.phoneNumber = phoneNumber;
         this.address = address;
         this.language = language;
@@ -125,5 +128,13 @@ public class User {
 
     public void setTokenId(String tokenId) {
         this.tokenId = tokenId;
+    }
+
+    public String getDeviceToken() {
+        return deviceToken;
+    }
+
+    public void setDeviceToken(String deviceToken) {
+        this.deviceToken = deviceToken;
     }
 }

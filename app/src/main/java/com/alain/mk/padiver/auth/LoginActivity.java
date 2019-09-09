@@ -7,9 +7,14 @@ import android.util.Patterns;
 import android.widget.EditText;
 
 import com.alain.mk.padiver.R;
+import com.alain.mk.padiver.api.UserHelper;
 import com.alain.mk.padiver.base.BaseActivity;
 import com.alain.mk.padiver.home.HomeActivity;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.iid.FirebaseInstanceId;
+
+import java.util.HashMap;
+import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.OnClick;
