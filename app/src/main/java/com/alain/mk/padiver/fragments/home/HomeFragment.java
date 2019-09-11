@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.widget.Toolbar;
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.core.widget.NestedScrollView;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -38,6 +39,7 @@ public class HomeFragment extends BaseFragment implements HomeAdapter.Listener{
     @BindView(R.id.fragment_home_recycler_view) RecyclerView recyclerView;
     @BindView(R.id.fragment_home_floating_actiion_button) FloatingActionButton floatingActionButton;
     @BindView(R.id.fragment_home_nested_scroll_view) NestedScrollView nestedScrollView;
+    @BindView(R.id.fragment_home_toolbar) Toolbar toolbar;
 
     private HomeAdapter homeAdapter;
     private static final int REGISTER_LIKE = 10;
@@ -50,8 +52,24 @@ public class HomeFragment extends BaseFragment implements HomeAdapter.Listener{
     @Override
     protected void updateData() {
 
+        this.configureToolbar();
         this.configureRecyclerView();
         this.iniComponent();
+    }
+
+
+    private void configureToolbar() {
+        toolbar.inflateMenu(R.menu.menu);
+        toolbar.setOnMenuItemClickListener(item -> {
+            switch (item.getItemId()) {
+                case R.id.menu_logout:
+                    return true;
+                case R.id.menu_search:
+                    return true;
+            }
+            return super.onOptionsItemSelected(item);
+        });
+
     }
 
     @OnClick(R.id.fragment_home_floating_actiion_button)

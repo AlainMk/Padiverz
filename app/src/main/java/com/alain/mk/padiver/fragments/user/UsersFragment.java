@@ -3,6 +3,7 @@ package com.alain.mk.padiver.fragments.user;
 import android.content.Intent;
 import android.view.View;
 
+import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -22,6 +23,7 @@ import butterknife.BindView;
 public class UsersFragment extends BaseFragment implements UserAdapter.Listener{
 
     @BindView(R.id.fragment_users_recycler_view) RecyclerView recyclerView;
+    @BindView(R.id.fragment_users_toolbar) Toolbar toolbar;
     @BindView(R.id.fragment_users_shimmer_container) ShimmerFrameLayout container;
 
     private UserAdapter userAdapter;
@@ -34,6 +36,7 @@ public class UsersFragment extends BaseFragment implements UserAdapter.Listener{
     @Override
     protected void updateData() {
 
+        this.configureToolbar();
         this.configureRecyclerview();
     }
 
@@ -47,6 +50,21 @@ public class UsersFragment extends BaseFragment implements UserAdapter.Listener{
     public void onStop() {
         super.onStop();
         container.stopShimmer();
+    }
+
+
+    private void configureToolbar() {
+        toolbar.inflateMenu(R.menu.menu);
+        toolbar.setOnMenuItemClickListener(item -> {
+            switch (item.getItemId()) {
+                case R.id.menu_logout:
+                    return true;
+                case R.id.menu_search:
+                    return true;
+            }
+            return super.onOptionsItemSelected(item);
+        });
+
     }
 
     // --------------------

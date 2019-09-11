@@ -1,16 +1,10 @@
 package com.alain.mk.padiver.home;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 
-import androidx.appcompat.app.ActionBar;
 import androidx.fragment.app.Fragment;
 
 import com.alain.mk.padiver.R;
-import com.alain.mk.padiver.auth.LoginActivity;
 import com.alain.mk.padiver.base.BaseActivity;
 import com.alain.mk.padiver.fragments.home.HomeFragment;
 import com.alain.mk.padiver.fragments.chat.ChatFragment;
@@ -29,7 +23,6 @@ public class HomeActivity extends BaseActivity {
     Fragment messageFragment;
     Fragment usersFragment;
     Fragment profileFragment;
-    ActionBar actionBar;
     FirebaseAuth firebaseAuth;
 
     //FOR DATAS
@@ -43,7 +36,6 @@ public class HomeActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
 
         firebaseAuth = FirebaseAuth.getInstance();
-        this.initToolbar();
         this.configureBottomView();
         this.showFirstFragment();
     }
@@ -56,31 +48,6 @@ public class HomeActivity extends BaseActivity {
     @Override
     public int getFrameLayout() {
         return R.layout.activity_home;
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.menu, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.menu_logout:
-                firebaseAuth.signOut();
-                startActivity(new Intent(HomeActivity.this, LoginActivity.class));
-                return true;
-            case R.id.menu_search:
-                return true;
-        }
-        return super.onOptionsItemSelected(item);
-    }
-
-    private void initToolbar() {
-        actionBar = getSupportActionBar();
-        actionBar.setTitle("News");
     }
 
     // -------------------
@@ -100,19 +67,15 @@ public class HomeActivity extends BaseActivity {
         switch (integer) {
             case R.id.menu_navigation_recent:
                 this.showFragment(FRAGMENT_HOME);
-                actionBar.setTitle("News");
                 break;
             case R.id.menu_navigation_message:
                 this.showFragment(FRAGMENT_MESSAGE);
-                actionBar.setTitle("Messages");
                 break;
             case R.id.menu_navigation_group:
                 this.showFragment(FRAGMENT_USERS);
-                actionBar.setTitle("Users");
                 break;
             case R.id.menu_navigation_account:
                 this.showFragment(FRAGMENT_PROFILE);
-                actionBar.setTitle("Profile");
                 break;
         }
         return true;

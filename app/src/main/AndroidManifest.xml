@@ -22,7 +22,8 @@
 
         <activity
             android:name=".home.HomeActivity"
-            android:label="Login"/>
+            android:label="Login"
+            android:theme="@style/AppTheme.NoTitle"/>
 
         <activity
             android:name=".auth.SignUpActivity"

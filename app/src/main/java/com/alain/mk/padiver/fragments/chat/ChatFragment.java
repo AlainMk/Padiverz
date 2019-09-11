@@ -3,6 +3,7 @@ package com.alain.mk.padiver.fragments.chat;
 
 import android.content.Intent;
 
+import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -20,6 +21,7 @@ import butterknife.BindView;
 
 public class ChatFragment extends BaseFragment {
 
+    @BindView(R.id.fragment_chat_toolbar) Toolbar toolbar;
     @BindView(R.id.fragment_chat_recycler_view) RecyclerView recyclerView;
 
     private ChatAdapter chatAdapter;
@@ -32,7 +34,23 @@ public class ChatFragment extends BaseFragment {
     @Override
     protected void updateData() {
 
+        this.configureToolbar();
         this.configureRecyclerView(this.getCurrentUser().getUid());
+    }
+
+
+    private void configureToolbar() {
+        toolbar.inflateMenu(R.menu.menu);
+        toolbar.setOnMenuItemClickListener(item -> {
+            switch (item.getItemId()) {
+                case R.id.menu_logout:
+                    return true;
+                case R.id.menu_search:
+                    return true;
+            }
+            return super.onOptionsItemSelected(item);
+        });
+
     }
 
     private void configureRecyclerView(String senderId) {
