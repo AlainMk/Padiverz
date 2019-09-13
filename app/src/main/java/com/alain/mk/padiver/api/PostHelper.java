@@ -23,15 +23,30 @@ public class PostHelper {
                 .orderBy("dateCreated", Query.Direction.DESCENDING);
     }
 
-    public static Task<DocumentReference> createPost(String title, String tags, String description, User userSender) {
+    public static Query getPostCollectionOffline() {
 
-        Post post = new Post(title, tags, description, userSender);
+        return FirebaseFirestore.getInstance()
+                .collection(COLLECTION_NAME)
+                .orderBy("dateCreated", Query.Direction.DESCENDING)
+                .limit(2);
+    }
+
+    public static Query getPostCollectionOrderByUser(String uid) {
+        return FirebaseFirestore.getInstance()
+                .collection(COLLECTION_NAME)
+                .whereEqualTo("uid", uid)
+                .orderBy("dateCreated", Query.Direction.DESCENDING);
+    }
+
+    public static Task<DocumentReference> createPost(String uid, String title, String tags, String description, User userSender) {
+
+        Post post = new Post(uid, title, tags, description, userSender);
         return PostHelper.getCollectionReference().add(post);
     }
 
-    public static Task<DocumentReference> createPostWithImage(String title, String tags, String description, User userSender, String urlImage) {
+    public static Task<DocumentReference> createPostWithImage(String uid, String title, String tags, String description, User userSender, String urlImage) {
 
-        Post post = new Post(title, tags, description, userSender, urlImage);
+        Post post = new Post(uid, title, tags, description, userSender, urlImage);
         return PostHelper.getCollectionReference().add(post);
     }
 }

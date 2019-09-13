@@ -47,6 +47,11 @@
             android:theme="@style/AppTheme.NoTitle"
             android:parentActivityName=".home.HomeActivity"/>
 
+        <activity
+            android:name=".auth.ActivityEditProfile"
+            android:parentActivityName=".home.HomeActivity"
+            android:label="Modifier Profil"/>
+
         <!-- NOTIFICATION SERVICE -->
 
         <service

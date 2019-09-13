@@ -6,6 +6,9 @@ import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class UserHelper {
 
     public static final String COLLECTION_NAME = "users";
@@ -31,8 +34,39 @@ public class UserHelper {
 
     // --- UPDATE ---
 
-    public static Task<Void> updateUsername(String username, String uid) {
-        return UserHelper.getUsersCollection().document(uid).update("username", username);
+    public static Task<Void> updateInfoUser(String uid, String username, String deviceToken, String phoneNumber, String address, String language, String bio, String hobbies, String webSite, String githubLink) {
+
+        Map<String, Object> usertMap = new HashMap<>();
+
+        usertMap.put("username", username);
+        usertMap.put("deviceToken", deviceToken);
+        usertMap.put("phoneNumber", phoneNumber);
+        usertMap.put("address", address);
+        usertMap.put("language", language);
+        usertMap.put("bio", bio);
+        usertMap.put("hobbies", hobbies);
+        usertMap.put("webSite", webSite);
+        usertMap.put("githubLink", githubLink);
+
+        return UserHelper.getUsersCollection().document(uid).update(usertMap);
+    }
+
+    public static Task<Void> updateInfoUserWithImage(String uid, String username, String urlPicture, String deviceToken, String phoneNumber, String address, String language, String bio, String hobbies, String webSite, String githubLink) {
+
+        Map<String, Object> usertMap = new HashMap<>();
+
+        usertMap.put("username", username);
+        usertMap.put("urlPicture", urlPicture);
+        usertMap.put("deviceToken", deviceToken);
+        usertMap.put("phoneNumber", phoneNumber);
+        usertMap.put("address", address);
+        usertMap.put("language", language);
+        usertMap.put("bio", bio);
+        usertMap.put("hobbies", hobbies);
+        usertMap.put("webSite", webSite);
+        usertMap.put("githubLink", githubLink);
+
+        return UserHelper.getUsersCollection().document(uid).update(usertMap);
     }
 
     // --- DELETE ---

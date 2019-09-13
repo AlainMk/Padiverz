@@ -34,10 +34,30 @@
         android:scrollingCache="true"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/fragment_home_recycler_view"
+
+        <LinearLayout
+            android:id="@+id/modal_fragment_comments_recycler_view_container"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_above="@id/modal_fragment_comments_add_message_container"
+            android:layout_below="@id/activity_message_buttons_container">
+
+            <!-- MESSAGE RECYCLER VIEW EMPTY -->
+            <!-- PROGRESS BAR -->
+            <ProgressBar
+                android:id="@+id/fragment_home_progress_bar"
+                android:layout_width="30dip"
+                android:layout_height="30dip"
+                android:layout_gravity="center"
+                android:layout_margin="@dimen/default_large_margin"/>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/fragment_home_recycler_view"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+        </LinearLayout>
+
 
     </androidx.core.widget.NestedScrollView>
 

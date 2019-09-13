@@ -6,6 +6,7 @@ import java.util.Date;
 
 public class Post {
 
+    private String uid;
     private String title;
     private String tags;
     private String description;
@@ -16,14 +17,16 @@ public class Post {
     public Post() {
     }
 
-    public Post(String title, String tags, String description, User userSender) {
+    public Post(String uid, String title, String tags, String description, User userSender) {
+        this.uid = uid;
         this.title = title;
         this.tags = tags;
         this.description = description;
         this.userSender = userSender;
     }
 
-    public Post(String title, String tags, String description, User userSender, String urlImage) {
+    public Post(String uid, String title, String tags, String description, User userSender, String urlImage) {
+        this.uid = uid;
         this.title = title;
         this.tags = tags;
         this.description = description;
@@ -78,5 +81,13 @@ public class Post {
 
     public void setUrlImage(String urlImage) {
         this.urlImage = urlImage;
+    }
+
+    public String getUid() {
+        return uid;
+    }
+
+    public void setUid(String uid) {
+        this.uid = uid;
     }
 }

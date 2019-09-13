@@ -1,77 +1,81 @@
-package com.alain.mk.padiver.fragments.home;
-
+package com.alain.mk.padiver.fragments.profile;
 
 import android.content.Intent;
-import android.graphics.Color;
+import android.text.TextUtils;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.widget.Toolbar;
-import androidx.coordinatorlayout.widget.CoordinatorLayout;
-import androidx.core.widget.NestedScrollView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.alain.mk.padiver.R;
 import com.alain.mk.padiver.api.ArticleHelper;
 import com.alain.mk.padiver.api.PostHelper;
+import com.alain.mk.padiver.api.UserHelper;
+import com.alain.mk.padiver.auth.ActivityEditProfile;
 import com.alain.mk.padiver.base.BaseFragment;
 import com.alain.mk.padiver.detail.DetailPostActivity;
 import com.alain.mk.padiver.fragments.comment.CommentsModalFragment;
+import com.alain.mk.padiver.fragments.home.HomeAdapter;
 import com.alain.mk.padiver.models.Post;
-import com.alain.mk.padiver.post.PostActivity;
+import com.alain.mk.padiver.models.User;
 import com.alain.mk.padiver.utils.ItemClickSupport;
 import com.alain.mk.padiver.utils.NetworkCheck;
-import com.alain.mk.padiver.utils.ViewAnimation;
 import com.bumptech.glide.Glide;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.Query;
 
 import butterknife.BindView;
 import butterknife.OnClick;
 
-import static com.firebase.ui.auth.AuthUI.getApplicationContext;
+public class ProfileFragment extends BaseFragment implements HomeAdapter.Listener{
 
-public class HomeFragment extends BaseFragment implements HomeAdapter.Listener{
+    @BindView(R.id.fragment_profile_toolbar) Toolbar toolbar;
+    @BindView(R.id.fragment_profile_text_username) TextView textViewUsername;
+    @BindView(R.id.fragment_profile_text_about) TextView textViewAbout;
+    @BindView(R.id.fragment_profile_text_hobbies) TextView textViewHobbies;
+    @BindView(R.id.fragment_profile_text_location) TextView textViewLocation;
+    @BindView(R.id.fragment_profile_text_skills) TextView textViewSkills;
+    @BindView(R.id.fragment_profile_text_git_hub_link) TextView textViewGithubLink;
+    @BindView(R.id.fragment_profile_text_web_site) TextView textViewWebSite;
+    @BindView(R.id.fragment_profile_text_phone_number) TextView textViewPhoneNumber;
+    @BindView(R.id.fragment_profile_image_profile) ImageView imageViewProfile;
+    @BindView(R.id.fragment_profile_progress_bar) ProgressBar progressBar;
+    @BindView(R.id.fragment_profile_recycler_view) RecyclerView recyclerView;
 
-    @BindView(R.id.fragment_home_coordinator_layout) CoordinatorLayout coordinatorLayout;
-    @BindView(R.id.fragment_home_recycler_view) RecyclerView recyclerView;
-    @BindView(R.id.fragment_home_progress_bar) ProgressBar progressBar;
-    @BindView(R.id.fragment_home_floating_actiion_button) FloatingActionButton floatingActionButton;
-    @BindView(R.id.fragment_home_nested_scroll_view) NestedScrollView nestedScrollView;
-    @BindView(R.id.fragment_home_toolbar) Toolbar toolbar;
+    private FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
 
     private HomeAdapter homeAdapter;
-    private static final int REGISTER_LIKE = 10;
 
     @Override
     protected int getLayoutId() {
-        return R.layout.fragment_home;
+        return R.layout.fragment_profile;
     }
 
     @Override
     protected void updateData() {
 
         this.configureToolbar();
-        this.iniComponent();
-
-        if (NetworkCheck.isConnect(getActivity())) {
-
-            this.configureRecyclerView();
-        }
+        this.updateUIWhenCreating();
+        this.configureRecyclerView();
     }
 
+    @OnClick(R.id.fragment_profile_floating_action_button)
+    public void onClickFloatingActionButton() {
+        startActivity(new Intent(getActivity(), ActivityEditProfile.class));
+    }
 
     private void configureToolbar() {
         toolbar.inflateMenu(R.menu.menu);
         toolbar.setOnMenuItemClickListener(item -> {
             switch (item.getItemId()) {
                 case R.id.menu_logout:
+                    firebaseAuth.signOut();
                     return true;
                 case R.id.menu_search:
                     return true;
@@ -81,35 +85,48 @@ public class HomeFragment extends BaseFragment implements HomeAdapter.Listener{
 
     }
 
-    @OnClick(R.id.fragment_home_floating_actiion_button)
-    public void onClickFloatingActionButton() {
-        startActivity(new Intent(getActivity(), PostActivity.class));
-    }
+    private void updateUIWhenCreating() {
 
-    boolean hide = false;
+        UserHelper.getUser(this.getCurrentUser().getUid()).addOnSuccessListener(documentSnapshot -> {
 
-    private void iniComponent() {
-        nestedScrollView.setOnScrollChangeListener((NestedScrollView.OnScrollChangeListener) (v, scrollX, scrollY, oldScrollX, oldScrollY) -> {
-            if (scrollY >= oldScrollY) { // down
-                if (hide) return;
-                ViewAnimation.hideFab(floatingActionButton);
-                ViewAnimation.hideFab(progressBar);
-                hide = true;
-            } else {
-                if (!hide) return;
-                ViewAnimation.showFab(floatingActionButton);
-                ViewAnimation.showFab(progressBar);
-                hide = false;
+            User modelCurrentUser = documentSnapshot.toObject(User.class);
+
+            if (modelCurrentUser.getUrlPicture() != null) {
+                Glide.with(this)
+                        .load(modelCurrentUser.getUrlPicture())
+                        .into(imageViewProfile);
             }
+
+            String phoneNumber = TextUtils.isEmpty(modelCurrentUser.getPhoneNumber()) ? getString(R.string.info_no_phone_number) : modelCurrentUser.getPhoneNumber();
+            this.textViewPhoneNumber.setText(phoneNumber);
+
+            String email = TextUtils.isEmpty(modelCurrentUser.getHobbies()) ? getString(R.string.info_no_hobbies_found) : modelCurrentUser.getHobbies();
+            this.textViewHobbies.setText(email);
+
+            String address = TextUtils.isEmpty(modelCurrentUser.getAddress()) ? getString(R.string.info_no_address_location) : modelCurrentUser.getAddress();
+            this.textViewLocation.setText(address);
+
+            String githubLink = TextUtils.isEmpty(modelCurrentUser.getGithubLink()) ? getString(R.string.info_no_github_link) : modelCurrentUser.getGithubLink();
+            this.textViewGithubLink.setText(githubLink);
+
+            String bio = TextUtils.isEmpty(modelCurrentUser.getBio()) ? getString(R.string.info_no_bio) : modelCurrentUser.getBio();
+            this.textViewAbout.setText(bio);
+
+            String webSite = TextUtils.isEmpty(modelCurrentUser.getWebSite()) ? getString(R.string.info_no_web_site) : modelCurrentUser.getWebSite();
+            this.textViewWebSite.setText(webSite);
+
+            String language = TextUtils.isEmpty(modelCurrentUser.getLanguage()) ? getString(R.string.info_no_language) : modelCurrentUser.getLanguage();
+            this.textViewSkills.setText(language);
+
+            String username = TextUtils.isEmpty(modelCurrentUser.getUsername()) ? getString(R.string.info_no_username_found) : modelCurrentUser.getUsername();
+            this.textViewUsername.setText(username);
         });
+
     }
 
-    // --------------------
-    // REST REQUESTS
-    // --------------------
     private void configureRecyclerView() {
 
-        this.homeAdapter = new HomeAdapter(generateOptionsForAdapter(PostHelper.getPostCollection()), Glide.with(this), this.getCurrentUser().getUid(), this);
+        this.homeAdapter = new HomeAdapter(generateOptionsForAdapter(PostHelper.getPostCollectionOrderByUser(this.getCurrentUser().getUid())), Glide.with(this), this.getCurrentUser().getUid(), this);
 
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         recyclerView.setAdapter(this.homeAdapter);
@@ -129,23 +146,6 @@ public class HomeFragment extends BaseFragment implements HomeAdapter.Listener{
                 .build();
     }
 
-    // Create OnCompleteListener called after tasks ended
-    private OnSuccessListener<Void> updateUIAfterRESTRequestsCompleted(final int origin){
-        return aVoid -> {
-            switch (origin) {
-                case REGISTER_LIKE:
-                    Snackbar snackbar = Snackbar.make(coordinatorLayout, R.string.register_like, Snackbar.LENGTH_SHORT);
-                    View sbView = snackbar.getView();
-                    TextView textView = sbView.findViewById(com.google.android.material.R.id.snackbar_text);
-                    textView.setTextColor(Color.WHITE);
-                    snackbar.show();
-                    break;
-                default:
-                    break;
-            }
-        };
-    }
-
     private void startMessageActivity(Post post) {
 
         Intent intent = new Intent(getActivity(), DetailPostActivity.class);
@@ -162,14 +162,8 @@ public class HomeFragment extends BaseFragment implements HomeAdapter.Listener{
     @Override
     public void onDataChanged() {
 
-        if (NetworkCheck.isConnect(getActivity())) {
-
-            progressBar.setVisibility(View.GONE);
-        } else {
-            toolbar.setVisibility(View.GONE);
-            Toast.makeText(getActivity(), "Pas de connexion internet", Toast.LENGTH_SHORT).show();
-        }
-
+        // Show ProgressBar in case RecyclerView is empty
+        progressBar.setVisibility(this.homeAdapter.getItemCount() == 0 ? View.VISIBLE : View.GONE);
     }
 
     @Override
@@ -181,8 +175,7 @@ public class HomeFragment extends BaseFragment implements HomeAdapter.Listener{
             ArticleHelper.getLikeReference(post.getTitle()).document(this.getCurrentUser().getUid()).get().addOnCompleteListener(task -> {
                 if (!task.getResult().exists()){
 
-                    ArticleHelper.createLike(this.getCurrentUser().getUid(),post.getTitle()).addOnSuccessListener(updateUIAfterRESTRequestsCompleted(REGISTER_LIKE))
-                            .addOnFailureListener(e ->
+                    ArticleHelper.createLike(this.getCurrentUser().getUid(),post.getTitle()).addOnFailureListener(e ->
                                     Toast.makeText(getActivity(), "" + e.getMessage(), Toast.LENGTH_SHORT).show());
                 }else {
                     ArticleHelper.deleteLike(this.getCurrentUser().getUid(), post.getTitle()).addOnFailureListener(e ->

@@ -8,7 +8,7 @@ import com.alain.mk.padiver.R;
 import com.alain.mk.padiver.base.BaseActivity;
 import com.alain.mk.padiver.fragments.home.HomeFragment;
 import com.alain.mk.padiver.fragments.chat.ChatFragment;
-import com.alain.mk.padiver.fragments.ProfileFragment;
+import com.alain.mk.padiver.fragments.profile.ProfileFragment;
 import com.alain.mk.padiver.fragments.user.UsersFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;

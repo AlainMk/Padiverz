@@ -12,6 +12,7 @@ public class User {
     private String address;
     private String language;
     private String bio;
+    private String hobbies;
     private String webSite;
     private String githubLink;
 
@@ -27,17 +28,27 @@ public class User {
         this.deviceToken = deviceToken;
     }
 
-    public User(String uid, String username, String urlPicture, String email, String tokenId, String deviceToken, String phoneNumber, String address, String language, String bio, String webSite, String githubLink) {
-        this.uid = uid;
+    public User(String username, String deviceToken, String phoneNumber, String address, String language, String bio, String hobbies, String webSite, String githubLink) {
         this.username = username;
-        this.urlPicture = urlPicture;
-        this.email = email;
-        this.tokenId = tokenId;
         this.deviceToken = deviceToken;
         this.phoneNumber = phoneNumber;
         this.address = address;
         this.language = language;
         this.bio = bio;
+        this.hobbies = hobbies;
+        this.webSite = webSite;
+        this.githubLink = githubLink;
+    }
+
+    public User(String username, String urlPicture, String deviceToken, String phoneNumber, String address, String language, String bio, String hobbies, String webSite, String githubLink) {
+        this.username = username;
+        this.urlPicture = urlPicture;
+        this.deviceToken = deviceToken;
+        this.phoneNumber = phoneNumber;
+        this.address = address;
+        this.language = language;
+        this.bio = bio;
+        this.hobbies = hobbies;
         this.webSite = webSite;
         this.githubLink = githubLink;
     }
@@ -136,5 +147,13 @@ public class User {
 
     public void setDeviceToken(String deviceToken) {
         this.deviceToken = deviceToken;
+    }
+
+    public String getHobbies() {
+        return hobbies;
+    }
+
+    public void setHobbies(String hobbies) {
+        this.hobbies = hobbies;
     }
 }

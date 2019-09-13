@@ -142,7 +142,7 @@ public class PostActivity extends BaseActivity {
                 editTags.setText(items);
                 editTags.addChipTerminator('\n', ChipTerminatorHandler.BEHAVIOR_CHIPIFY_ALL);
 
-                PostHelper.createPost(editTitle.getText().toString(), editTags.getText().toString(), editDescription.getText().toString(), modelCurrentUser)
+                PostHelper.createPost(this.getCurrentUser().getUid(), editTitle.getText().toString(), editTags.getText().toString(), editDescription.getText().toString(), modelCurrentUser)
                         .addOnSuccessListener(updateUIAfterRESTRequestsCompleted(REGISTER_MEMBER))
                         .addOnFailureListener(this.onFailureListener());
             } else {
@@ -185,7 +185,7 @@ public class PostActivity extends BaseActivity {
 
                                     String pathImageSavedInFirebase = task1.getResult().toString();
                                     // SAVE MESSAGE IN FIRESTORE
-                                    PostHelper.createPostWithImage(title, tags, desc, modelCurrentUser, pathImageSavedInFirebase)
+                                    PostHelper.createPostWithImage(this.getCurrentUser().getUid(), title, tags, desc, modelCurrentUser, pathImageSavedInFirebase)
                                             .addOnSuccessListener(this.updateUIAfterRESTRequestsCompleted(REGISTER_MEMBER))
                                             .addOnFailureListener(this.onFailureListener());
                                 }
