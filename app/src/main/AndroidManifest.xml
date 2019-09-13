@@ -52,6 +52,11 @@
             android:parentActivityName=".home.HomeActivity"
             android:label="Modifier Profil"/>
 
+        <activity
+            android:name=".profile.ProfileActivity"
+            android:theme="@style/AppTheme.NoTitle"
+            android:parentActivityName=".home.HomeActivity"/>
+
         <!-- NOTIFICATION SERVICE -->
 
         <service

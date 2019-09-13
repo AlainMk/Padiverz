@@ -5,8 +5,8 @@
     android:background="@android:color/black"
     android:layout_height="wrap_content"
     android:layout_marginBottom="@dimen/spacing_middle"
-    android:layout_marginLeft="@dimen/spacing_large"
-    android:layout_marginRight="@dimen/spacing_large"
+    android:layout_marginLeft="@dimen/spacing_middle"
+    android:layout_marginRight="@dimen/spacing_middle"
     android:layout_marginTop="@dimen/spacing_middle"
     android:visibility="visible"
     app:cardCornerRadius="3dp"
@@ -40,6 +40,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="alainmk\u0040adams.green.com"
+            android:textAlignment="center"
             android:textAppearance="@style/TextAppearance.AppCompat.Body1"
             android:textColor="@color/grey_40" />
 
@@ -65,18 +66,12 @@
                 android:padding="@dimen/spacing_medium">
 
                 <ImageButton
+                    android:id="@+id/fragment_users_item_view_message"
                     android:layout_width="?attr/actionBarSize"
                     android:layout_height="?attr/actionBarSize"
                     android:background="@android:color/transparent"
                     android:tint="@color/grey_60"
                     app:srcCompat="@drawable/ic_message" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="MESSAGE"
-                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1"
-                    android:textColor="@color/grey_5" />
 
             </LinearLayout>
 
@@ -96,18 +91,13 @@
                 android:padding="@dimen/spacing_medium">
 
                 <ImageButton
+                    android:id="@+id/fragment_users_item_view_profile"
                     android:layout_width="?attr/actionBarSize"
                     android:layout_height="?attr/actionBarSize"
                     android:background="@android:color/transparent"
                     android:tint="@color/grey_60"
                     app:srcCompat="@drawable/ic_person_outline_white_24dp" />
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="PROFILE"
-                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1"
-                    android:textColor="@color/grey_5" />
 
             </LinearLayout>
         </LinearLayout>

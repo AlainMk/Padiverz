@@ -22,7 +22,7 @@ import java.util.Date;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class HomeViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
+public class HomeViewHolder extends RecyclerView.ViewHolder {
 
     @BindView(R.id.fragment_home_post_item_linear_like) LinearLayout linearLayoutLike;
     @BindView(R.id.fragment_home_post_item_linear_comment) LinearLayout linearLayoutComment;
@@ -69,8 +69,18 @@ public class HomeViewHolder extends RecyclerView.ViewHolder implements View.OnCl
             this.imagePost.setVisibility(View.GONE);
         }
 
-        this.linearLayoutLike.setOnClickListener(this);
-        this.linearLayoutComment.setOnClickListener(this);
+        this.linearLayoutLike.setOnClickListener(v -> {
+
+            HomeAdapter.Listener callback1 = callbackWeakRef.get();
+            if (callback1 != null) callback1.onClickLikeButton(getAdapterPosition());
+        });
+
+        this.linearLayoutComment.setOnClickListener(v -> {
+
+            HomeAdapter.Listener callback12 = callbackWeakRef.get();
+            if (callback12 != null) callback12.onClickCommentButton(getAdapterPosition());
+        });
+
         this.callbackWeakRef = new WeakReference<>(callback);
     }
 
@@ -79,13 +89,5 @@ public class HomeViewHolder extends RecyclerView.ViewHolder implements View.OnCl
     private String convertDateToHour(Date date){
         DateFormat dfTime = new SimpleDateFormat("HH:mm");
         return dfTime.format(date);
-    }
-
-    @Override
-    public void onClick(View v) {
-
-        HomeAdapter.Listener callback = callbackWeakRef.get();
-        if (callback != null) callback.onClickLikeButton(getAdapterPosition());
-        if (callback != null) callback.onClickCommentButton(getAdapterPosition());
     }
 }

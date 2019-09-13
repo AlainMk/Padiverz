@@ -15,6 +15,8 @@ public class UserAdapter extends FirestoreRecyclerAdapter<User, UsersViewHolder>
 
     public interface Listener {
         void onDataChanged();
+        void onClickMessageButton(int position);
+        void onClickProfileButton(int position);
     }
 
     private User user;
@@ -31,7 +33,7 @@ public class UserAdapter extends FirestoreRecyclerAdapter<User, UsersViewHolder>
 
     @Override
     protected void onBindViewHolder(@NonNull UsersViewHolder usersViewHolder, int i, @NonNull User user) {
-        usersViewHolder.updateWithUsers(this.getUser(i), this.glide);
+        usersViewHolder.updateWithUsers(this.getUser(i), this.glide, this.callback);
     }
 
     @NonNull

@@ -23,7 +23,7 @@
             app:titleEnabled="false">
 
             <ImageView
-                android:id="@+id/fragment_profile_image_profile"
+                android:id="@+id/activity_profile_image_profile"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:fitsSystemWindows="true"
@@ -37,7 +37,7 @@
                 android:background="@color/overlay_dark_10" />
 
             <androidx.appcompat.widget.Toolbar
-                android:id="@+id/fragment_profile_toolbar"
+                android:id="@+id/activity_profile_toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
                 app:layout_collapseMode="pin"
@@ -79,7 +79,7 @@
                         android:layout_height="match_parent" />
 
                     <TextView
-                        android:id="@+id/fragment_profile_text_username"
+                        android:id="@+id/activity_profile_text_username"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/spacing_large"
@@ -122,7 +122,7 @@
                             android:textStyle="bold" />
 
                         <TextView
-                            android:id="@+id/fragment_profile_text_about"
+                            android:id="@+id/activity_profile_text_about"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/spacing_middle"
@@ -168,7 +168,7 @@
                             android:textStyle="bold" />
 
                         <TextView
-                            android:id="@+id/fragment_profile_text_hobbies"
+                            android:id="@+id/activity_profile_text_hobbies"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/spacing_middle"
@@ -215,7 +215,7 @@
                             android:textStyle="bold" />
 
                         <TextView
-                            android:id="@+id/fragment_profile_text_location"
+                            android:id="@+id/activity_profile_text_location"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/spacing_middle"
@@ -261,7 +261,7 @@
                             android:textStyle="bold" />
 
                         <TextView
-                            android:id="@+id/fragment_profile_text_skills"
+                            android:id="@+id/activity_profile_text_skills"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/spacing_middle"
@@ -307,7 +307,7 @@
                             android:textStyle="bold" />
 
                         <TextView
-                            android:id="@+id/fragment_profile_text_web_site"
+                            android:id="@+id/activity_profile_text_web_site"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/spacing_middle"
@@ -353,7 +353,7 @@
                             android:textStyle="bold" />
 
                         <TextView
-                            android:id="@+id/fragment_profile_text_git_hub_link"
+                            android:id="@+id/activity_profile_text_git_hub_link"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/spacing_middle"
@@ -399,7 +399,7 @@
                             android:textStyle="bold" />
 
                         <TextView
-                            android:id="@+id/fragment_profile_text_phone_number"
+                            android:id="@+id/activity_profile_text_phone_number"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/spacing_middle"
@@ -460,14 +460,14 @@
 
                             <!-- PROGRESS BAR -->
                             <ProgressBar
-                                android:id="@+id/fragment_profile_progress_bar"
+                                android:id="@+id/activity_profile_progress_bar"
                                 android:layout_width="40dip"
                                 android:layout_height="40dip"
                                 android:layout_gravity="center"
                                 android:layout_margin="@dimen/default_large_margin"/>
 
                             <androidx.recyclerview.widget.RecyclerView
-                                android:id="@+id/fragment_profile_recycler_view"
+                                android:id="@+id/activity_profile_recycler_view"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"/>
 
