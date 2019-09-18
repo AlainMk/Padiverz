@@ -2,6 +2,7 @@ package com.alain.mk.padiver.controllers.fragments.chat;
 
 
 import android.content.Intent;
+import android.view.View;
 
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -15,15 +16,17 @@ import com.alain.mk.padiver.controllers.activities.message.MessageActivity;
 import com.alain.mk.padiver.models.Message;
 import com.alain.mk.padiver.utils.ItemClickSupport;
 import com.bumptech.glide.Glide;
+import com.facebook.shimmer.ShimmerFrameLayout;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.firebase.firestore.Query;
 
 import butterknife.BindView;
 
-public class ChatFragment extends BaseFragment {
+public class ChatFragment extends BaseFragment implements ChatAdapter.Listener{
 
     @BindView(R.id.fragment_chat_toolbar) Toolbar toolbar;
     @BindView(R.id.fragment_chat_recycler_view) RecyclerView recyclerView;
+    @BindView(R.id.fragment_chat_shimmer_container) ShimmerFrameLayout container;
 
     private ChatAdapter chatAdapter;
 
@@ -39,6 +42,17 @@ public class ChatFragment extends BaseFragment {
         this.configureRecyclerView(this.getCurrentUser().getUid());
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        container.startShimmer();
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        container.stopShimmer();
+    }
 
     private void configureToolbar() {
         toolbar.inflateMenu(R.menu.menu);
@@ -56,7 +70,7 @@ public class ChatFragment extends BaseFragment {
 
     private void configureRecyclerView(String senderId) {
 
-        this.chatAdapter = new ChatAdapter(generateOptionsForAdapter(ConvHelper.getAllConversation(senderId)), Glide.with(this));
+        this.chatAdapter = new ChatAdapter(generateOptionsForAdapter(ConvHelper.getAllConversation(senderId)), Glide.with(this), this);
 
         ItemClickSupport.addTo(recyclerView, R.layout.fragment_chat_item)
                 .setOnItemClickListener((rv, position, v) -> this.startMessageActivity(this.chatAdapter.getConversation(position)));
@@ -74,6 +88,13 @@ public class ChatFragment extends BaseFragment {
                 .setQuery(query, Message.class)
                 .setLifecycleOwner(this)
                 .build();
+    }
+
+
+    @Override
+    public void onDataChanged() {
+
+        container.setVisibility(this.chatAdapter.getItemCount() == 0 ? View.VISIBLE : View.GONE);
     }
 
     private void startMessageActivity(Message message) {

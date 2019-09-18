@@ -4,11 +4,12 @@ import android.content.Intent;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.ProgressBar;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.widget.NestedScrollView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -26,7 +27,10 @@ import com.alain.mk.padiver.models.User;
 import com.alain.mk.padiver.utils.ItemClickSupport;
 import com.alain.mk.padiver.utils.NetworkCheck;
 import com.bumptech.glide.Glide;
+import com.facebook.shimmer.ShimmerFrameLayout;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
+import com.google.android.material.appbar.AppBarLayout;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.Query;
 
@@ -45,8 +49,11 @@ public class ProfileFragment extends BaseFragment implements HomeAdapter.Listene
     @BindView(R.id.fragment_profile_text_web_site) TextView textViewWebSite;
     @BindView(R.id.fragment_profile_text_phone_number) TextView textViewPhoneNumber;
     @BindView(R.id.fragment_profile_image_profile) ImageView imageViewProfile;
-    @BindView(R.id.fragment_profile_progress_bar) ProgressBar progressBar;
     @BindView(R.id.fragment_profile_recycler_view) RecyclerView recyclerView;
+    @BindView(R.id.fragment_profile_shimmer_container) ShimmerFrameLayout container;
+    @BindView(R.id.fragment_profile_floating_action_button) FloatingActionButton floatingActionButton;
+    @BindView(R.id.fragment_profile_nested) NestedScrollView nestedScrollView;
+    @BindView(R.id.fragment_profile_app_bar_layout) AppBarLayout barLayout;
 
     private FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
 
@@ -63,6 +70,18 @@ public class ProfileFragment extends BaseFragment implements HomeAdapter.Listene
         this.configureToolbar();
         this.updateUIWhenCreating();
         this.configureRecyclerView();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        container.startShimmer();
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        container.stopShimmer();
     }
 
     @OnClick(R.id.fragment_profile_floating_action_button)
@@ -162,8 +181,15 @@ public class ProfileFragment extends BaseFragment implements HomeAdapter.Listene
     @Override
     public void onDataChanged() {
 
-        // Show ProgressBar in case RecyclerView is empty
-        progressBar.setVisibility(this.homeAdapter.getItemCount() == 0 ? View.VISIBLE : View.GONE);
+        if (NetworkCheck.isConnect(getActivity())) {
+
+            container.setVisibility(View.GONE);
+            floatingActionButton.setVisibility(View.VISIBLE);
+            nestedScrollView.setVisibility(View.VISIBLE);
+            barLayout.setVisibility(View.VISIBLE);
+        } else {
+            Toast.makeText(getActivity(), "Pas de connexion internet", Toast.LENGTH_SHORT).show();
+        }
     }
 
     @Override

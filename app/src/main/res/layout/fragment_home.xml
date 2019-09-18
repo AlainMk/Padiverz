@@ -16,7 +16,8 @@
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:background="@color/colorPrimary"
-            app:title="News"
+            app:title="@string/app_name"
+            app:navigationIcon="@drawable/ic_image_notification"
             android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
             app:contentInsetStartWithNavigation="0dp"
             app:layout_scrollFlags="scroll|enterAlways"
@@ -34,7 +35,6 @@
         android:scrollingCache="true"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-
         <LinearLayout
             android:id="@+id/modal_fragment_comments_recycler_view_container"
             android:layout_width="match_parent"
@@ -43,14 +43,23 @@
             android:layout_above="@id/modal_fragment_comments_add_message_container"
             android:layout_below="@id/activity_message_buttons_container">
 
-            <!-- MESSAGE RECYCLER VIEW EMPTY -->
-            <!-- PROGRESS BAR -->
-            <ProgressBar
-                android:id="@+id/fragment_home_progress_bar"
-                android:layout_width="30dip"
-                android:layout_height="30dip"
-                android:layout_gravity="center"
-                android:layout_margin="@dimen/default_large_margin"/>
+            <com.facebook.shimmer.ShimmerFrameLayout
+                android:id="@+id/fragment_home_shimmer_container"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <include layout="@layout/place_holder_post"/>
+                    <include layout="@layout/place_holder_post"/>
+
+                </LinearLayout>
+
+            </com.facebook.shimmer.ShimmerFrameLayout>
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/fragment_home_recycler_view"
@@ -58,9 +67,7 @@
                 android:layout_height="match_parent"/>
         </LinearLayout>
 
-
     </androidx.core.widget.NestedScrollView>
-
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fragment_home_floating_actiion_button"

@@ -5,6 +5,30 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <com.facebook.shimmer.ShimmerFrameLayout
+        android:id="@+id/fragment_chat_shimmer_container"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/search_bar"
+        android:layout_marginTop="10dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <include layout="@layout/place_holder_chat"/>
+            <include layout="@layout/place_holder_chat"/>
+            <include layout="@layout/place_holder_chat"/>
+            <include layout="@layout/place_holder_chat"/>
+            <include layout="@layout/place_holder_chat"/>
+            <include layout="@layout/place_holder_chat"/>
+            <include layout="@layout/place_holder_chat"/>
+
+        </LinearLayout>
+
+    </com.facebook.shimmer.ShimmerFrameLayout>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -37,7 +61,8 @@
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:background="@color/colorPrimary"
-            app:title="Discussions"
+            app:title="@string/app_name"
+            app:navigationIcon="@drawable/ic_image_notification"
             android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
             app:contentInsetStartWithNavigation="0dp"
             app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />

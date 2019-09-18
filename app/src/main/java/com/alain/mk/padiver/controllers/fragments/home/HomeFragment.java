@@ -27,6 +27,7 @@ import com.alain.mk.padiver.utils.ItemClickSupport;
 import com.alain.mk.padiver.utils.NetworkCheck;
 import com.alain.mk.padiver.utils.ViewAnimation;
 import com.bumptech.glide.Glide;
+import com.facebook.shimmer.ShimmerFrameLayout;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -40,10 +41,10 @@ public class HomeFragment extends BaseFragment implements HomeAdapter.Listener{
 
     @BindView(R.id.fragment_home_coordinator_layout) CoordinatorLayout coordinatorLayout;
     @BindView(R.id.fragment_home_recycler_view) RecyclerView recyclerView;
-    @BindView(R.id.fragment_home_progress_bar) ProgressBar progressBar;
     @BindView(R.id.fragment_home_floating_actiion_button) FloatingActionButton floatingActionButton;
     @BindView(R.id.fragment_home_nested_scroll_view) NestedScrollView nestedScrollView;
     @BindView(R.id.fragment_home_toolbar) Toolbar toolbar;
+    @BindView(R.id.fragment_home_shimmer_container) ShimmerFrameLayout container;
 
     private HomeAdapter homeAdapter;
     private static final int REGISTER_LIKE = 10;
@@ -65,6 +66,17 @@ public class HomeFragment extends BaseFragment implements HomeAdapter.Listener{
         }
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        container.startShimmer();
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        container.stopShimmer();
+    }
 
     private void configureToolbar() {
         toolbar.inflateMenu(R.menu.menu);
@@ -92,12 +104,10 @@ public class HomeFragment extends BaseFragment implements HomeAdapter.Listener{
             if (scrollY >= oldScrollY) { // down
                 if (hide) return;
                 ViewAnimation.hideFab(floatingActionButton);
-                ViewAnimation.hideFab(progressBar);
                 hide = true;
             } else {
                 if (!hide) return;
                 ViewAnimation.showFab(floatingActionButton);
-                ViewAnimation.showFab(progressBar);
                 hide = false;
             }
         });
@@ -163,7 +173,7 @@ public class HomeFragment extends BaseFragment implements HomeAdapter.Listener{
 
         if (NetworkCheck.isConnect(getActivity())) {
 
-            progressBar.setVisibility(View.GONE);
+            container.setVisibility(View.GONE);
         } else {
             toolbar.setVisibility(View.GONE);
             Toast.makeText(getActivity(), "Pas de connexion internet", Toast.LENGTH_SHORT).show();

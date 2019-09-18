@@ -14,13 +14,20 @@ import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 
 public class ChatAdapter extends FirestoreRecyclerAdapter<Message, ChatViewHolder> {
 
+    public interface Listener {
+        void onDataChanged();
+    }
+
     private RequestManager glide;
     private Message message;
 
+    //FOR COMMUNICATION
+    private Listener callback;
 
-    public ChatAdapter(@NonNull FirestoreRecyclerOptions<Message> options, RequestManager glide) {
+    public ChatAdapter(@NonNull FirestoreRecyclerOptions<Message> options, RequestManager glide, Listener callback) {
         super(options);
         this.glide = glide;
+        this.callback = callback;
     }
 
     @Override
@@ -39,6 +46,12 @@ public class ChatAdapter extends FirestoreRecyclerAdapter<Message, ChatViewHolde
 
     public Message getConversation(int position) {
         return this.message = getItem(position);
+    }
+
+    @Override
+    public void onDataChanged() {
+        super.onDataChanged();
+        this.callback.onDataChanged();
     }
 
 }

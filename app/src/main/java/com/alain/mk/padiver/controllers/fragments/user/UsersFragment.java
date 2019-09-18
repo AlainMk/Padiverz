@@ -53,7 +53,6 @@ public class UsersFragment extends BaseFragment implements UserAdapter.Listener 
         container.stopShimmer();
     }
 
-
     private void configureToolbar() {
         toolbar.inflateMenu(R.menu.menu);
         toolbar.setOnMenuItemClickListener(item -> {

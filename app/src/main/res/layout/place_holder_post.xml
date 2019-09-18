@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="@dimen/spacing_medium"
+    android:layout_marginBottom="@dimen/spacing_medium"
+    android:visibility="visible"
+    app:cardCornerRadius="0dp"
+    app:cardElevation="4dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/background_place_holder"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/spacing_medium"
+            android:layout_marginLeft="@dimen/spacing_large"
+            android:layout_marginRight="@dimen/spacing_large"
+            android:layout_marginTop="@dimen/spacing_large"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/fragment_home_post_item_image_profile"
+                android:layout_width="@dimen/spacing_xxlarge"
+                android:layout_height="@dimen/spacing_xxlarge"
+                android:textColor="#dddddd"
+                android:background="#dddddd"/>
+
+            <View
+                android:layout_width="@dimen/spacing_large"
+                android:layout_height="0dp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/fragment_home_post_item_user_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:text="Homer J. Allen"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+                    android:textColor="#dddddd"
+                    android:background="#dddddd"/>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/spacing_small"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+                        android:text="in "
+                        android:textAppearance="@style/TextAppearance.AppCompat.Caption"
+                        android:textColor="#dddddd"
+                        android:background="#dddddd"/>
+
+                    <TextView
+                        android:id="@+id/fragment_home_post_item_tags"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+                        android:text="City, Office"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Caption"
+                        android:textColor="#dddddd"
+                        android:background="#dddddd"
+                        android:textStyle="bold" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/fragment_home_post_item_text_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/spacing_large"
+            android:lineSpacingExtra="4dp"
+            android:maxLines="1"
+            android:text="Je suis la super star de la republique democratique du congo et j'aime beaucoup Aicha et Deborah"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:textColor="#dddddd"
+            android:background="#dddddd"
+            app:fontFamily="sans-serif-medium" />
+
+        <TextView
+            android:id="@+id/fragment_home_post_item_text_description"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/spacing_large"
+            android:lineSpacingExtra="4dp"
+            android:text="Depuis la nuit de temps le monde s'est mis en danger dans les recherches mener par les scientifiques et maintenant les
+consequense des ces actes valent la vie des milliers d'hobitants dans le bresil et le canada"
+            android:maxLines="3"
+            android:textAppearance="@style/TextAppearance.AppCompat.Caption"
+            android:textColor="#dddddd"
+            android:background="#dddddd"/>
+
+        <ImageView
+            android:id="@+id/fragment_home_post_item_image_post"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:scaleType="centerCrop"
+            android:visibility="gone"
+            android:src="@color/colorAccent"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/grey_40" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/spacing_xxlarge"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingLeft="@dimen/spacing_large"
+            android:paddingRight="@dimen/spacing_large">
+
+            <LinearLayout
+                android:id="@+id/fragment_home_post_item_linear_like"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:id="@+id/fragment_home_post_item_button_like"
+                    android:layout_width="@dimen/spacing_mlarge"
+                    android:layout_height="@dimen/spacing_mlarge"
+                    android:layout_marginEnd="@dimen/spacing_middle"
+                    android:layout_marginRight="@dimen/spacing_middle"
+                    android:background="#dddddd"/>
+
+                <TextView
+                    android:id="@+id/fragment_home_post_item_text_count_like"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:text="45 likes"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Caption"
+                    android:textColor="#dddddd"
+                    android:background="#dddddd"/>
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="@dimen/spacing_large"
+                android:layout_height="0dp" />
+
+            <LinearLayout
+                android:id="@+id/fragment_home_post_item_linear_comment"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:id="@+id/fragment_home_post_item_button_comment"
+                    android:layout_width="@dimen/spacing_mlarge"
+                    android:layout_height="@dimen/spacing_mlarge"
+                    android:layout_marginEnd="@dimen/spacing_middle"
+                    android:layout_marginRight="@dimen/spacing_middle"
+                    android:background="#dddddd"/>
+
+                <TextView
+                    android:id="@+id/fragment_home_post_item_text_count_comments"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:text="12 Comments"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Caption"
+                    android:textColor="#dddddd"
+                    android:background="#dddddd"/>
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/fragment_home_post_item_text_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="end|right"
+                android:text="12h ago"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                android:textColor="#dddddd"
+                android:background="#dddddd"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+</androidx.cardview.widget.CardView>

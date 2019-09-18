@@ -10,21 +10,54 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/search_bar"
-        android:layout_marginTop="15dp">
+        android:layout_marginTop="10dp">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <include layout="@layout/place_holder_user"/>
-            <include layout="@layout/place_holder_user"/>
-            <include layout="@layout/place_holder_user"/>
-            <include layout="@layout/place_holder_user"/>
-            <include layout="@layout/place_holder_user"/>
-            <include layout="@layout/place_holder_user"/>
-            <include layout="@layout/place_holder_user"/>
-            <include layout="@layout/place_holder_user"/>
+            <GridLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:columnCount="2"
+                android:rowCount="2">
+
+                <include layout="@layout/place_holder_user"
+                    android:layout_marginBottom="@dimen/spacing_middle"
+                    android:layout_marginLeft="@dimen/spacing_middle"
+                    android:layout_marginRight="@dimen/spacing_middle"
+                    android:layout_marginTop="@dimen/spacing_middle"
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"/>
+
+                <include layout="@layout/place_holder_user"
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    android:layout_marginBottom="@dimen/spacing_middle"
+                    android:layout_marginLeft="@dimen/spacing_middle"
+                    android:layout_marginRight="@dimen/spacing_middle"
+                    android:layout_marginTop="@dimen/spacing_middle"/>
+
+                <include layout="@layout/place_holder_user"
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    android:layout_marginBottom="@dimen/spacing_middle"
+                    android:layout_marginLeft="@dimen/spacing_middle"
+                    android:layout_marginRight="@dimen/spacing_middle"
+                    android:layout_marginTop="@dimen/spacing_middle"/>
+
+                <include layout="@layout/place_holder_user"
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    android:layout_marginBottom="@dimen/spacing_middle"
+                    android:layout_marginLeft="@dimen/spacing_middle"
+                    android:layout_marginRight="@dimen/spacing_middle"
+                    android:layout_marginTop="@dimen/spacing_middle"/>
+
+            </GridLayout>
+
         </LinearLayout>
 
     </com.facebook.shimmer.ShimmerFrameLayout>
@@ -61,7 +94,8 @@
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:background="@color/colorPrimary"
-            app:title="Users"
+            app:title="@string/app_name"
+            app:navigationIcon="@drawable/ic_image_notification"
             android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
             app:contentInsetStartWithNavigation="0dp"
             app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />

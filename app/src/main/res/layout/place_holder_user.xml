@@ -2,58 +2,107 @@
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@android:color/black"
-    android:layout_height="wrap_content">
+    android:background="@color/colorPrimary"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="@dimen/spacing_middle"
+    android:layout_marginLeft="@dimen/spacing_middle"
+    android:layout_marginRight="@dimen/spacing_middle"
+    android:layout_marginTop="@dimen/spacing_middle"
+    android:visibility="visible"
+    app:cardCornerRadius="3dp"
+    app:cardElevation="2dp">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@android:color/black"
-        android:minHeight="?attr/actionBarSize"
-        android:orientation="horizontal">
+        android:gravity="center_horizontal"
+        android:background="@color/background_place_holder"
+        android:orientation="vertical">
 
         <ImageView
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_marginLeft="@dimen/spacing_large"
-            android:layout_marginRight="@dimen/spacing_large"
-            android:layout_marginTop="@dimen/spacing_middle"
-            android:background="@color/colorPrimary"/>
+            android:id="@+id/fragment_users_item_image"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:background="#dddddd"
+            android:layout_marginTop="@dimen/spacing_xlarge"/>
+
+        <TextView
+            android:id="@+id/fragment_users_item_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_large"
+            android:background="#dddddd"
+            android:text="Adams Green"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Title"
+            android:textColor="#dddddd" />
+
+        <TextView
+            android:id="@+id/fragment_users_item_mail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:text="alainmk\u0040adams.green.com"
+            android:background="#dddddd"
+            android:textAlignment="center"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+            android:textColor="#dddddd" />
 
         <View
-            android:layout_width="@dimen/spacing_medium"
-            android:layout_height="0dp" />
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="@dimen/spacing_middle"
+            android:background="@color/grey_900" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="horizontal">
 
             <LinearLayout
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:paddingBottom="@dimen/spacing_middle"
-                android:paddingTop="@dimen/spacing_middle">
+                android:layout_weight="1"
+                android:background="?attr/selectableItemBackground"
+                android:clickable="true"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:padding="@dimen/spacing_medium">
 
-                <TextView
-                    android:layout_width="250dp"
-                    android:layout_height="wrap_content"
-                    android:background="@color/colorPrimary"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
-                    android:textColor="@color/grey_5" />
-
-                <TextView
-                    android:layout_width="220dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/spacing_small"
-                    android:maxLines="2"
-                    android:background="@color/colorPrimary"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-                    android:textColor="@color/grey_40" />
+                <ImageButton
+                    android:id="@+id/fragment_users_item_view_message"
+                    android:layout_width="?attr/actionBarSize"
+                    android:layout_height="?attr/actionBarSize"
+                    android:background="#dddddd"
+                    android:tint="#dddddd"
+                    app:srcCompat="@drawable/ic_message" />
 
             </LinearLayout>
 
+            <View
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:background="@color/grey_900" />
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="?attr/selectableItemBackground"
+                android:clickable="true"
+                android:orientation="horizontal"
+                android:gravity="center"
+                android:padding="@dimen/spacing_medium">
+
+                <ImageButton
+                    android:id="@+id/fragment_users_item_view_profile"
+                    android:layout_width="?attr/actionBarSize"
+                    android:layout_height="?attr/actionBarSize"
+                    android:background="#dddddd"
+                    android:tint="#dddddd"
+                    app:srcCompat="@drawable/ic_person_outline_white_24dp" />
+
+
+            </LinearLayout>
         </LinearLayout>
 
     </LinearLayout>
