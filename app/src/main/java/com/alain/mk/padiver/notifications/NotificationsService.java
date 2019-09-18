@@ -12,7 +12,7 @@ import android.os.Build;
 import androidx.core.app.NotificationCompat;
 
 import com.alain.mk.padiver.R;
-import com.alain.mk.padiver.home.HomeActivity;
+import com.alain.mk.padiver.controllers.activities.home.HomeActivity;
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
 

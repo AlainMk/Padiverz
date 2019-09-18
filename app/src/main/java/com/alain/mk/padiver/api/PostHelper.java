@@ -23,19 +23,11 @@ public class PostHelper {
                 .orderBy("dateCreated", Query.Direction.DESCENDING);
     }
 
-    public static Query getPostCollectionOffline() {
-
-        return FirebaseFirestore.getInstance()
-                .collection(COLLECTION_NAME)
-                .orderBy("dateCreated", Query.Direction.DESCENDING)
-                .limit(2);
-    }
-
     public static Query getPostCollectionOrderByUser(String uid) {
+
         return FirebaseFirestore.getInstance()
                 .collection(COLLECTION_NAME)
-                .whereEqualTo("uid", uid)
-                .orderBy("dateCreated", Query.Direction.DESCENDING);
+                .whereEqualTo("uid", uid);
     }
 
     public static Task<DocumentReference> createPost(String uid, String title, String tags, String description, User userSender) {

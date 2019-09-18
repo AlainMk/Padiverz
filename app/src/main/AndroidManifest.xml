@@ -12,7 +12,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".auth.LoginActivity">
+        <activity android:name=".controllers.activities.auth.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -21,41 +21,38 @@
         </activity>
 
         <activity
-            android:name=".home.HomeActivity"
+            android:name=".controllers.activities.home.HomeActivity"
             android:label="Login"
             android:theme="@style/AppTheme.NoTitle"/>
 
         <activity
-            android:name=".auth.SignUpActivity"
-            android:parentActivityName=".auth.LoginActivity"
+            android:name=".controllers.activities.auth.SignUpActivity"
+            android:parentActivityName=".controllers.activities.auth.LoginActivity"
             android:label="Create Account"/>
 
         <activity
-            android:name=".message.MessageActivity"
+            android:name=".controllers.activities.message.MessageActivity"
             android:theme="@style/AppTheme.NoTitle"/>
-        <activity
-            android:name=".ImageActivity"
-            android:parentActivityName=".home.HomeActivity"/>
 
         <activity
-            android:name=".post.PostActivity"
-            android:parentActivityName=".home.HomeActivity"
+            android:name=".controllers.activities.post.PostActivity"
+            android:parentActivityName=".controllers.activities.home.HomeActivity"
             android:label="Exprimez vous"/>
 
         <activity
-            android:name=".detail.DetailPostActivity"
+            android:name=".controllers.activities.detail.DetailPostActivity"
             android:theme="@style/AppTheme.NoTitle"
-            android:parentActivityName=".home.HomeActivity"/>
+            android:parentActivityName=".controllers.activities.home.HomeActivity"/>
 
         <activity
-            android:name=".auth.ActivityEditProfile"
-            android:parentActivityName=".home.HomeActivity"
+            android:name=".controllers.activities.auth.ActivityEditProfile"
+            android:parentActivityName=".controllers.activities.home.HomeActivity"
             android:label="Modifier Profil"/>
 
         <activity
-            android:name=".profile.ProfileActivity"
+            android:name=".controllers.activities.profile.ProfileActivity"
             android:theme="@style/AppTheme.NoTitle"
-            android:parentActivityName=".home.HomeActivity"/>
+            android:parentActivityName=".controllers.activities.home.HomeActivity"/>
 
         <!-- NOTIFICATION SERVICE -->
 
